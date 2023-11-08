@@ -20,47 +20,60 @@ int _strlen(const char *s)
 }
 /**
  * _strtok - Split a string into tokens.
- * @str: String to be split.
+ * @c: String to be split.
  * @delim: Delimiter characters.
  *
  * Splits the input string into tokens using delimiter characters.
  * Return: the next token found, or NULL if no more tokens exist.
  */
-char *_strtok(char *str, char *delim)
+unsigned int is_delim(char c, char delim)
 {
-	char *token;
-	static char *buffer;
-	int len = _strlen(delim);
-	int i = 0;
+	while (delim != '\0')
+	{
+		if (c == delim)
+		return (1);
+		delim++;
+	}
+	return (0);
+}
+char_strtok(char c, char delim)
+{
+	static char buffer;
+	char token;
 
 	if (delim == NULL)
-		return (NULL);
-
-	if (str != NULL)
+	return (NULL);
+	if (!c)
 	{
-		buffer = str;
+		c = buffer;
 	}
-	else if (buffer == NULL || *buffer == '\0')
+	while (1)
 	{
-		return (NULL);
-	}
-
-	token = buffer;
-	while (*buffer != '\0' && i != len)
-	{
-		i = 0;
-		while (*buffer != '\0' && *buffer != delim)
-			buffer++;
-		while (buffer[i] == delim[i] && i < len)
-			i++;
-
-		if (i == len)
+		if (is_delim(c, delim))
 		{
-			*buffer = '\0';
-			buffer += len;
+			c++;
+			continue;
 		}
-		else
-			buffer++;
+		if (c == '\0')
+		{
+			return (NULL);
+		}
+		break;
 	}
-	return (token);
+	token = c;
+	while (1)
+	{
+		if (c == '\0')
+	{
+		buffer = c;
+		return (token);
+	}
+	if (is_delim(c, delim))
+	{
+	*c = '\0';
+		buffer = c + 1;
+		return (token);
+	}
+	c++;
+	}
 }
