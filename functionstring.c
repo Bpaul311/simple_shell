@@ -19,6 +19,7 @@ int _strlen(const char *s)
 	return (size);
 }
 /**
+ * is_delim - checks if a character is a delimiter
  * _strtok - Split a string into tokens.
  * @c: String to be split.
  * @delim: Delimiter characters.
