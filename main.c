@@ -25,13 +25,16 @@ void read_line(ProgramData *Data)
 	int counter;
 	char **av;
 
-	printf("$ ");
-	chars_read = getline(&full_command, &buffer, stdin);
-	if (chars_read == -1)
+	while (1)
+	{
+
+		printf("$ ");
+		chars_read = getline(&full_command, &buffer, stdin);
+		if (chars_read == -1)
 		{
-	printf("Exiting shell ...\n");
-		return;  // Changed to return void
-	}
+			printf("Exiting shell ...\n");
+			break;  
+		}
 	else
 	{
 		copy_command = malloc(sizeof(char) * chars_read);
@@ -64,6 +67,7 @@ void read_line(ProgramData *Data)
 		free(av);
 		free(full_command);
 		free(copy_command);
+		}
 	}
 }
 
