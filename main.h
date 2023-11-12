@@ -13,8 +13,8 @@
 #include <limits.h>
 #include <stddef.h>
 
-#define some important  macros 
-#define MESSAGE "$ " 
+#define SOME_IMPORTANT_MACO
+#define MESSAGE "$ "
 
 
 /**
@@ -27,20 +27,21 @@
  * @tokens: Pointer to an array of tokenized input
  * @env: Copy of the environment variables
  * @alias_list: Array of pointers with aliases
- * @Status : the status of our shell.
+ * @status : the status of our shell.
  */
 
-typedef struct info {
-    char *name;
-    char *input_line;
-    char *command;
-    int exec_num;
-    int file_descriptor;
-    char **tokens;
-    char **env;
-    char **alias_list;
-    int status;
-}ProgramData;
+typedef struct info
+{
+	char *name;
+	char *input_line;
+	char *command;
+	int exec_num;
+	int file_descriptor;
+	char **tokens;
+	char **env;
+	char **alias_list;
+	int status;
+} ProgramData;
 
 /* built-in function structure */
 /**
