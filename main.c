@@ -9,6 +9,19 @@
 int main(int ac, char **av, char **env)
 {
     ProgramData info = {NULL};
+    char message = "";
+
+    initialise_data(&info, argc, argv, env);
+    signal(SIGINT, handle_EOF);
+    if (is-interactive(ac))
+    {
+	    err_num = 2;
+	    message = MESSAGE;
+    }
+    else{
+	    err_num = 0;
+
+
     read_line(&info);
 
     return 0;
@@ -70,6 +83,16 @@ void initialise_data(ProgramData *data; char **av; char **env, int ac)
 int is_interactive(int ac)
 {
 	return (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && ac == 1);
+}
+/**
+ * handle_EOF - Display msg_terminal on a newline
+ * when the signal SIGINT (ctrl + c) is sent to the program
+ * @UNUSED: it's there for the prototype.
+ */
+void handle_EOF(int sig)
+{
+	_prinf("\n");
+	_printf(MESSAGE);
 }
 void read_line(ProgramData *Data)
 {

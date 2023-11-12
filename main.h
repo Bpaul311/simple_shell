@@ -14,7 +14,7 @@
 #include <stddef.h>
 
 #define some important  macros 
-#define PROMPT "$ " 
+#define MESSAGE "$ " 
 
 
 /**
