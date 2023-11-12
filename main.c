@@ -88,13 +88,18 @@ int is_interactive(int ac)
  * handle_EOF - Display msg_terminal on a newline
  * when the signal SIGINT (ctrl + c) is sent to the program
  * @UNUSED: it's there for the prototype.
- *
+ * @sig: signal number
  */
 void handle_EOF(int sig)
 {
 	_prinf("\n");
 	_printf(MESSAGE);
 }
+/**
+ * read_line - reads input lines from the user
+ *@Data: Pointer to the program data structure
+ */
+
 void read_line(ProgramData *Data)
 {
 	char *copy_command = NULL, *full_command = NULL;
