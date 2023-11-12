@@ -8,24 +8,24 @@
  */
 int main(int ac, char **av, char **env)
 {
-    ProgramData info = {NULL};
-    char message = "";
+	ProgramData info = {NULL};
+	char message = "";
 
-    initialise_data(&info, argc, argv, env);
-    signal(SIGINT, handle_EOF);
-    if (is-interactive(ac))
-    {
-	    err_num = 2;
-	    message = MESSAGE;
-    }
-    else{
-	    err_num = 0;
+	initialise_data(&info, argc, argv, env);
+	signal(SIGINT, handle_EOF);
+	if (is - interactive(ac))
+	{
+		err_num = 2;
+		message = MESSAGE;
+	}
+		else
+		{
+			err_num = 0;
 
+			read_line(&info);
 
-    read_line(&info);
-
-    return 0;
-}
+			return (0);
+		}
 /**
  * initialise_data - Initializes program data into the structure
  * @data: A pointer to data structure
@@ -36,14 +36,14 @@ int main(int ac, char **av, char **env)
  */
 void initialise_data(ProgramData *data; char **av; char **env, int ac)
 {
-	unsigned int counter; 
+	unsigned int counter;
 
-        data->name = av[0];
+	data->name = av[0];
 	data->input = NULL;
 	data->command = NULL;
 	data->exec_num = 0;
 	data->status  = 0;
-	data ->token = NULL;
+	data->token = NULL;
 	data->alias_list = NULL;
 	if (ac == 1)
 		data->file_descriptor = STDIN_FILENO;
@@ -59,11 +59,11 @@ void initialise_data(ProgramData *data; char **av; char **env, int ac)
 			exit(127);
 		}
 	}
-	 for (i = 0; environ[i]; i++)
-		 ;
-	 data->env = malloc(sizeof(char *) * (i + 1));
-	 for (i = 0; environ[i]; i++)
-	
+	for (i = 0; environ[i]; i++)
+		;
+	data->env = malloc(sizeof(char *) * (i + 1));
+	for (i = 0; environ[i]; i++)
+
 		data->env[i] = _strdup(environ[i]);
 	data->env[i] = NULL;
 	env = data->env;
@@ -88,6 +88,7 @@ int is_interactive(int ac)
  * handle_EOF - Display msg_terminal on a newline
  * when the signal SIGINT (ctrl + c) is sent to the program
  * @UNUSED: it's there for the prototype.
+ *
  */
 void handle_EOF(int sig)
 {
@@ -113,7 +114,7 @@ void read_line(ProgramData *Data)
 		if (chars_read == -1)
 		{
 			printf("Exiting shell ...\n");
-			break;  
+			break;
 		}
 	else
 	{
