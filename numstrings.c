@@ -16,7 +16,7 @@ int num_of_digits(int num)
 	}
 	else
 		num1 = n;
-	
+
 	while (num1 > 9)
 	{
 		num_of_digits++;
@@ -36,9 +36,10 @@ char *itoa(int num)
 	char *str;
 
 	str = malloc(sizeof(char) * (len + 1));
-	if (str == 0)
+	if (str == NULL)
 		return (NULL);
 	*(str + len) = '\0';
+
 	if (num < 0)
 	{
 		num1 = num * (-1);
@@ -49,11 +50,14 @@ char *itoa(int num)
 		num1 = num;
 	}
 	len--;
-	do {
+	do
+
+	{
 		*(str + len) = (num1 % 10) + '0';
 		num1 = num1 / 10;
 		len--;
-	} while (num1 > 0);
+	}
+		while (num1 > 0);
 	return (str);
 }
 /**
@@ -66,6 +70,7 @@ int _atoi(char *str)
 {
 	int sign = 1;
 	unsigned int number = 0;
+
 	while (!('0' <= *str && *str <= '9') && *str != '\0')
 	{
 		if (*str == '-')
@@ -74,12 +79,12 @@ int _atoi(char *str)
 			sign *= +1;
 		str++;
 	}
+
 	while ('0' <= *str && *str <= '9' && *str != '\0')
 	{
 
 		number = (number * 10) + (*str - '0');
 		str++;
 	}
-	return (number * sign);
+	return ((int) (number * sign));
 }
-
