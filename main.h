@@ -13,10 +13,16 @@
 #include <limits.h>
 #include <stddef.h>
 
+<<<<<<< HEAD
 /*define some important  macros */
 #define BUFSIZE 1024
 #define MESSAGE "$ " 
 #define UNUSED __attribute__((unused))
+=======
+#define SOME_IMPORTANT_MACO
+#define MESSAGE "$ "
+
+>>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
 
 /**
  * struct info - Structure for the program's data
@@ -28,6 +34,7 @@
  * @tokens: Pointer to an array of tokenized input
  * @env: Copy of the environment variables
  * @alias_list: Array of pointers with aliases
+<<<<<<< HEAD
  */
 
 typedef struct info {
@@ -40,6 +47,23 @@ typedef struct info {
     char **env;
     char **alias_list;
 }ProgramData;
+=======
+ * @status : the status of our shell.
+ */
+
+typedef struct info
+{
+	char *name;
+	char *input_line;
+	char *command;
+	int exec_num;
+	int file_descriptor;
+	char **tokens;
+	char **env;
+	char **alias_list;
+	int status;
+} ProgramData;
+>>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
 
 /* built-in function structure */
 /**

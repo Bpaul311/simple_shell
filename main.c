@@ -8,6 +8,7 @@
  */
 int main(int ac, char **av, char **env)
 {
+<<<<<<< HEAD
     ProgramData info = {NULL};
     char msg = " Simple shell$";
 
@@ -20,13 +21,31 @@ int main(int ac, char **av, char **env)
     }
     else{
 	    err_num = 0;
+=======
+	ProgramData info = {NULL};
+	char message = "";
+>>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
 
+	initialise_data(&info, argc, argv, env);
+	signal(SIGINT, handle_EOF);
+	if (is - interactive(ac))
+	{
+		err_num = 2;
+		message = MESSAGE;
+	}
+		else
+		{
+			err_num = 0;
 
+<<<<<<< HEAD
 
     read_line(&info);
+=======
+			read_line(&info);
+>>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
 
-    return 0;
-}
+			return (0);
+		}
 /**
  * initialise_data - Initializes program data into the structure
  * @data: A pointer to data structure
@@ -37,13 +56,18 @@ int main(int ac, char **av, char **env)
  */
 void initialise_data(ProgramData *data; char **av; char **env, int ac)
 {
-	unsigned int counter; 
+	unsigned int counter;
 
-        data->name = av[0];
+	data->name = av[0];
 	data->input = NULL;
 	data->command = NULL;
 	data->exec_num = 0;
+<<<<<<< HEAD
 	data ->token = NULL;
+=======
+	data->status  = 0;
+	data->token = NULL;
+>>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
 	data->alias_list = NULL;
 	if (ac == 1)
 		data->file_descriptor = STDIN_FILENO;
@@ -59,11 +83,11 @@ void initialise_data(ProgramData *data; char **av; char **env, int ac)
 			exit(127);
 		}
 	}
-	 for (i = 0; environ[i]; i++)
-		 ;
-	 data->env = malloc(sizeof(char *) * (i + 1));
-	 for (i = 0; environ[i]; i++)
-	
+	for (i = 0; environ[i]; i++)
+		;
+	data->env = malloc(sizeof(char *) * (i + 1));
+	for (i = 0; environ[i]; i++)
+
 		data->env[i] = _strdup(environ[i]);
 	data->env[i] = NULL;
 	env = data->env;
@@ -88,6 +112,7 @@ int is_interactive(int ac)
  * handle_EOF - Display msg_terminal on a newline
  * when the signal SIGINT (ctrl + c) is sent to the program
  * @UNUSED: it's there for the prototype.
+ * @sig: signal number
  */
 void handle_EOF(int sig UNUSED)
 {
@@ -95,6 +120,7 @@ void handle_EOF(int sig UNUSED)
 	_printf(MESSAGE);
 }
 /**
+<<<<<<< HEAD
  * display_message - Dispalys the message loop
  * @msg: Printed msg_terminal
  * @data: Prompt loop displays
@@ -109,6 +135,11 @@ void display_message(char *msg_terminal, data_of_program *data)
 		_printf(msg);
 		err_code = string_length = _getline(data);
 
+=======
+ * read_line - reads input lines from the user
+ *@Data: Pointer to the program data structure
+ */
+>>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
 
 void read_line(ProgramData *Data)
 {
@@ -129,7 +160,7 @@ void read_line(ProgramData *Data)
 		if (chars_read == -1)
 		{
 			printf("Exiting shell ...\n");
-			break;  
+			break;
 		}
 	else
 	{
