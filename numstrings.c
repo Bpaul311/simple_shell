@@ -82,4 +82,19 @@ int _atoi(char *str)
 	}
 	return (number * sign);
 }
+int count_occurrences(char *str, char *ch)
+{
+	if (str == NULL || ch == NULL)
+		return (0);
 
+	int i = 0, counter = 0;
+
+	while (str[i]) {
+		if (str[i] == ch[0]) {
+			counter++;
+		}
+		i++;
+	}
+
+	return (counter);
+}

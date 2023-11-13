@@ -9,17 +9,18 @@
 int main(int ac, char **av, char **env)
 {
     ProgramData info = {NULL};
-    char message = "";
+    char msg = " Simple shell$";
 
     initialise_data(&info, argc, argv, env);
     signal(SIGINT, handle_EOF);
     if (is-interactive(ac))
     {
 	    err_num = 2;
-	    message = MESSAGE;
+	    msg = MESSAGE;
     }
     else{
 	    err_num = 0;
+
 
 
     read_line(&info);
@@ -42,7 +43,6 @@ void initialise_data(ProgramData *data; char **av; char **env, int ac)
 	data->input = NULL;
 	data->command = NULL;
 	data->exec_num = 0;
-	data->status  = 0;
 	data ->token = NULL;
 	data->alias_list = NULL;
 	if (ac == 1)
@@ -89,11 +89,27 @@ int is_interactive(int ac)
  * when the signal SIGINT (ctrl + c) is sent to the program
  * @UNUSED: it's there for the prototype.
  */
-void handle_EOF(int sig)
+void handle_EOF(int sig UNUSED)
 {
 	_prinf("\n");
 	_printf(MESSAGE);
 }
+/**
+ * display_message - Dispalys the message loop
+ * @msg: Printed msg_terminal
+ * @data: Prompt loop displays
+ */
+void display_message(char *msg_terminal, data_of_program *data)
+{
+	int run = 1;
+	int err_code = 0, string_length = 0;
+
+	while (run)
+	{
+		_printf(msg);
+		err_code = string_length = _getline(data);
+
+
 void read_line(ProgramData *Data)
 {
 	char *copy_command = NULL, *full_command = NULL;

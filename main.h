@@ -13,9 +13,10 @@
 #include <limits.h>
 #include <stddef.h>
 
-#define some important  macros 
+/*define some important  macros */
+#define BUFSIZE 1024
 #define MESSAGE "$ " 
-
+#define UNUSED __attribute__((unused))
 
 /**
  * struct info - Structure for the program's data
@@ -27,7 +28,6 @@
  * @tokens: Pointer to an array of tokenized input
  * @env: Copy of the environment variables
  * @alias_list: Array of pointers with aliases
- * @Status : the status of our shell.
  */
 
 typedef struct info {
@@ -39,7 +39,6 @@ typedef struct info {
     char **tokens;
     char **env;
     char **alias_list;
-    int status;
 }ProgramData;
 
 /* built-in function structure */
@@ -55,7 +54,18 @@ typedef struct builtin_func
 	int (*function)(ProgramData *data);
 } builtin_t;
 
-/* String Function */
-char *_strdup(const char *s);
-int _strlen(const char *s);
+/*======== function_strings.c ========*/
+int _strlen(const char *s); 
+int _strcmp(char *str1, char *str2);
+void rev_string(char *s);
+char *_strcat(char *destination, const char *source);
+char *_str_duplicate(char *str);
+
+/*======== num_strings.c ========*/
+int num_of_digits(int num);
+char *itoa(int num);
+int _atoi(char *str);
+int count_occurrences(char *str, char *ch);
+
+
 #endif

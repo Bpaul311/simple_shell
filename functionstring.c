@@ -19,62 +19,109 @@ int _strlen(const char *s)
 	return (size);
 }
 /**
- * is_delim - checks if a character is a delimiter
- * _strtok - Split a string into tokens.
- * @c: String to be split.
- * @delim: Delimiter characters.
- *
- * Splits the input string into tokens using delimiter characters.
- * Return: the next token found, or NULL if no more tokens exist.
+ * _strcmp- compares two strings
+ * @str1: the first string
+ * @str2: the second string
+ * Return: 0 on succ, or the difference
  */
-unsigned int is_delim(char c, char delim)
+
+int _strcmp(char *str1, char *str2)
 {
-	while (delim != '\0')
+	while (*str1 && *str2 && *str1 == *str2)
 	{
-		if (c == delim)
-		return (1);
-		delim++;
+		str1++;
+		str2++;
 	}
+	if (*str1 != *str2)
+		return (*str1 - *str2);
 	return (0);
 }
-char_strtok(char c, char delim)
+/**
+ * rev_string- reverses a string
+ * @s: the string
+ */
+void rev_string(char *s)
 {
-	static char buffer;
-	char token;
+	int count = 0, i, j;
+	char *str, temp;
 
-	if (delim == NULL)
-	return (NULL);
-	if (!c)
+	while (count >= 0)
 	{
-		c = buffer;
+		if (s[count] == '\0')
+			break;
+		count++;
 	}
-	while (1)
+	str = s;
+	for (i = 0; i < (count - 1); i++)
 	{
-		if (is_delim(c, delim))
+		for (j = i + 1; j > 0; j--)
 		{
-			c++;
-			continue;
+			temp = *(str + j);
+			*(str + j) = *(str + (j - 1));
+			*(str + (j - 1)) = temp;
 		}
-		if (c == '\0')
-		{
-			return (NULL);
-		}
-		break;
 	}
-	token = c;
-	while (1)
+}
+/**
+ * _strcat - concatenates 2 strings.
+ * @destination: String 1
+ * @source: String 2
+ *
+ * Return: A pointer to the array
+ */
+char *_strcat(char *destination, const char *source)
+{
+	if (destination == NULL)
+		destination = "";
+	if (source == NULL)
+		source = "";
+
+	size_t i = 0, j = 0;
+
+	while (destination[i] != '\0')
+	
+		i++;
+	
+
+	while (source[j] != '\0')
 	{
-		if (c == '\0')
+		destination[i] = source[j];
+		i++;
+		j++;
+	}
+
+	destination[i] = '\0';
+
+	return destination;
+}
+
+/**
+ * _str_duplicate - Duplicates a string
+ * @str: String to be duplicated
+ * Return: duplicated string.
+ */
+char *_str_duplicate(char *str)
+{
+	char *res;
+	int length, i;
+
+	if (str == NULL)
+		return (NULL);
+
+	length = _strlen(str) + 1;
+
+	res = malloc(sizeof(char) * length);
+
+	if (res == NULL)
 	{
-		buffer = c;
-		return (token);
+		errno = ENOMEM;
+		perror("Can't allocate memmory");
+		return (NULL);
 	}
-	if (is_delim(c, delim))
+	for (i = 0; i < length ; i++)
 	{
-	*c = '\0';
-		buffer = c + 1;
-		return (token);
+		res[i] = str[i];
 	}
-	c++;
-	}
+
+	return (res);
 }
