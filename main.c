@@ -6,25 +6,6 @@
  * @env: Array of strings containing the environment variables.
  * Return: 0 on success, non-zero on failure.
  */
-int main(int ac, char **av, char **env)
-{
-<<<<<<< HEAD
-    ProgramData info = {NULL};
-    char msg = " Simple shell$";
-
-    initialise_data(&info, argc, argv, env);
-    signal(SIGINT, handle_EOF);
-    if (is-interactive(ac))
-    {
-	    err_num = 2;
-	    msg = MESSAGE;
-    }
-    else{
-	    err_num = 0;
-=======
-	ProgramData info = {NULL};
-	char message = "";
->>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
 
 	initialise_data(&info, argc, argv, env);
 	signal(SIGINT, handle_EOF);
@@ -37,12 +18,9 @@ int main(int ac, char **av, char **env)
 		{
 			err_num = 0;
 
-<<<<<<< HEAD
 
-    read_line(&info);
-=======
+	read_line(&info);
 			read_line(&info);
->>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
 
 			return (0);
 		}
@@ -54,7 +32,7 @@ int main(int ac, char **av, char **env)
  * @ac: The number of values received from the cmdline
  * Return: Nothing
  */
-void initialise_data(ProgramData *data; char **av; char **env, int ac)
+void initialise_data(ProgramData *data, char **av, char **env, int ac)
 {
 	unsigned int counter;
 
@@ -62,12 +40,12 @@ void initialise_data(ProgramData *data; char **av; char **env, int ac)
 	data->input = NULL;
 	data->command = NULL;
 	data->exec_num = 0;
-<<<<<<< HEAD
-	data ->token = NULL;
-=======
+	< < < < < < < HEAD
+	data->token = NULL;
+	= = = = = = =
 	data->status  = 0;
 	data->token = NULL;
->>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
+	> > > > > > > de875e9eea5c237ff95b6d989c15560235923dd0
 	data->alias_list = NULL;
 	if (ac == 1)
 		data->file_descriptor = STDIN_FILENO;
@@ -135,13 +113,12 @@ void display_message(char *msg_terminal, data_of_program *data)
 		_printf(msg);
 		err_code = string_length = _getline(data);
 
-=======
+/**
  * read_line - reads input lines from the user
  *@Data: Pointer to the program data structure
  */
->>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
 
-void read_line(ProgramData *Data)
+void read_line(ProgramData  *Data)
 {
 	char *copy_command = NULL, *full_command = NULL;
 	ssize_t chars_read = 0;
