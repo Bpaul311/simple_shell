@@ -74,4 +74,7 @@ int add_alias(char *alias_name, data_of_program *data);
 void free_pointers_array(char **pointers_array);
 void free_tokens_and_input(data_of_program *data);
 void free_everything(data_of_program *data);
+/*======== print_functions.c ========*/
+int _printf(char *str);
+int _print_err(char *str);
 #endif

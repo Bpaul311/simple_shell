@@ -25,13 +25,3 @@ int _print_err(char *str)
 	return (write(STDERR_FILENO, str, strlen(str)));
 }
 
-/**
- *manag_eof - signal handler for eof
- *@signal: Signal number
- */
-
-void manag_eof(int signal)
-{
-	print("\n", STDOUT_FILENO);
-	print(PROMPT, STDOUT_FILENO);
-}
