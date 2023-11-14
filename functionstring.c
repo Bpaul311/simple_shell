@@ -79,9 +79,9 @@ char *_strcat(char *destination, const char *source)
 	size_t i = 0, j = 0;
 
 	while (destination[i] != '\0')
-	
+
 		i++;
-	
+
 
 	while (source[j] != '\0')
 	{
@@ -92,7 +92,7 @@ char *_strcat(char *destination, const char *source)
 
 	destination[i] = '\0';
 
-	return destination;
+	return (destination);
 }
 
 /**
