@@ -13,17 +13,10 @@
 #include <limits.h>
 #include <stddef.h>
 
-<<<<<<< HEAD
 /*define some important  macros */
 #define BUFSIZE 1024
 #define MESSAGE "$ " 
 #define UNUSED __attribute__((unused))
-=======
-#define SOME_IMPORTANT_MACO
-#define MESSAGE "$ "
-
->>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
-
 /**
  * struct info - Structure for the program's data
  * @name: The name of the executable
@@ -34,7 +27,6 @@
  * @tokens: Pointer to an array of tokenized input
  * @env: Copy of the environment variables
  * @alias_list: Array of pointers with aliases
-<<<<<<< HEAD
  */
 
 typedef struct info {
@@ -47,25 +39,7 @@ typedef struct info {
     char **env;
     char **alias_list;
 }ProgramData;
-=======
- * @status : the status of our shell.
- */
 
-typedef struct info
-{
-	char *name;
-	char *input_line;
-	char *command;
-	int exec_num;
-	int file_descriptor;
-	char **tokens;
-	char **env;
-	char **alias_list;
-	int status;
-} ProgramData;
->>>>>>> de875e9eea5c237ff95b6d989c15560235923dd0
-
-/* built-in function structure */
 /**
  * Structure for built-in functions
  *
@@ -91,5 +65,13 @@ char *itoa(int num);
 int _atoi(char *str);
 int count_occurrences(char *str, char *ch);
 
-
+/*======== alliasses.c ========*/
+int append_string(char *buffer, char *str_to_add);
+int print_alias_info(data_of_program *data, char *alias);
+char *retrieve_alias_value(data_of_program *data, char *alias);
+int add_alias(char *alias_name, data_of_program *data);
+/*======== freeing.c ========*/
+void free_pointers_array(char **pointers_array);
+void free_tokens_and_input(data_of_program *data);
+void free_everything(data_of_program *data);
 #endif
