@@ -91,9 +91,15 @@ char *str_tok(char *line, char *delim);
 
 
 /*======== environment.c ========*/
+<<<<<<< HEAD
 int env_remove_key(char *key, ProgramData *data);
 char *set_env(char *name, ProgramData *data, int value);
 void print_env(ProgramData *data);
+=======
+int env_remove_key(char *key, data_of_program *data);
+char *set_env(char *name, int value, data_of_program *data);
+void print_env(data_of_program *data);
+>>>>>>> 0dd653853e07398aa536b46df74ac12696a389b3
 
 /*======== main.c  ========*/
 void handle_EOF(int sig UNUSED);
@@ -102,9 +108,31 @@ int is_interactive(int ac);
 void initialise_data(ProgramData *data, char **av, char **env, int ac);
 
 /*======== find_errors.c  ========*/
+<<<<<<< HEAD
 void print_common_error(ProgramData *data, char *n_as_string);
 void print_specific_error(ProgramData *data, int errorcode);
 void print_error_message(int errorcode, ProgramData *data);
 
 
+=======
+void print_common_error(data_of_program *data, char *n_as_string);
+void print_specific_error(data_of_program *data, int errorcode);
+void print_error_message(int errorcode, data_of_progrram *data);
+/*======== builtins.c  ========*/
+int Display_env(data_of_program *data);
+int builtin_set_env(data_of_program *data);
+int unset_env(data_of_program *data);
+int custom_exit(data_of_program *data);
+int find_builtin(data_of_program *data);
+/*======== execute.c  ========*/
+int execute_command(data_of_program *data)
+/*======== freeing.c  ========*/
+void free_everything(data_of_program *data);
+void free_tokens_and_input(data_of_program *data);
+void free_pointers_array(char **pointers_array);
+/*======== path.c  ========*/
+int find_program(data_of_program *data);
+char **find_path(data_of_program *data);
+int find_file(char *full_path);
+>>>>>>> 0dd653853e07398aa536b46df74ac12696a389b3
 #endif

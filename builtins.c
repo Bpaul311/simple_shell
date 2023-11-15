@@ -22,6 +22,7 @@ int find_builtin(ProgramData *data)
 };
 
 for (counter = 0; arr[counter].func_name != NULL; counter++)
+<<<<<<< HEAD
 	{
 	if (_strcmp(arr[counter].func_name, data->command))
 
@@ -77,3 +78,13 @@ int builtin_t_list(ProgramData *data)
 		}
 	}
 	return (-1);
+=======
+    {
+        if (_strcmp(arr[counter].func_name, data->command))
+        
+            return (arr[counter].function(data));
+    }
+    
+    return (-1);
+ }
+>>>>>>> 0dd653853e07398aa536b46df74ac12696a389b3
