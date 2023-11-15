@@ -46,7 +46,7 @@ void free_tokens_and_input(data_of_program *data)
  *
  * Return: Nothing.
  */
-void free_everything(data_of_program *data)
+void free_everything(ProgramData *data)
 {
 	if (data->file_descriptor != 0)
 	{

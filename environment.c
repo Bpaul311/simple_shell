@@ -4,7 +4,7 @@
  * @data: A struct containing the program's data.
  * Return: nothing
  */
-void print_env(data_of_program *data)
+void print_env(ProgramData *data)
 {
 	int i;
 
@@ -21,7 +21,7 @@ void print_env(data_of_program *data)
  * Return: a pointer to the value of the variable or NULL if it doesn't exist
  */
 
-char *fetch_info(char *name, data_of_program *data)
+char *fetch_info(char *name, ProgramData *data)
 {
 	int i, len;
 
@@ -49,7 +49,7 @@ char *fetch_info(char *name, data_of_program *data)
  * Return: a pointer to the value of the variable or NULL if it doesn't exist
  */
 
-char *set_env(char *name, data_of_program *data, int value)
+char *set_env(char *name, ProgramData *data, int value)
 {
 	int i, len, key_exists = 0;
 
@@ -82,7 +82,7 @@ char *set_env(char *name, data_of_program *data, int value)
  * @data: A struct containing the program's data.
  * Return: 1 if the key was removed, 0 if the key does not exist.
  */
-int env_remove_key(char *key, data_of_program *data)
+int env_remove_key(char *key, ProgramData *data)
 {
 	int i, len;
 

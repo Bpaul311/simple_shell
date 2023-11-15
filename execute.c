@@ -6,35 +6,35 @@
  * Return: 0 on success, otherwise -1.
  */
 
-int execute_command(data_of_program *data)
+int execute_command(ProgramData *data)
 {
-	int return_value = 0, status;
+	int value = 0, status;
 	pid_t pid;
 
-	return_value = find_builtin(data);
-	if (return_value != -1)
-		return (return_value);
+	value = find_builtin(data);
+	if (value != -1)
+		return (value);
 
 	/* check for program file system */
-	return_value = find_prog(data);
-	if (return_value)
-		return (return_value);
+	value = find_prog(data);
+	if (value)
+		return (value);
 	else
 	{
-	
+
 		pid = fork();
 
 		if (pid == -1)
 		{
 			perror("fork");
-			perror(data->command_name);
+			perror(data->command);
 			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
 		{/* I am the child process, I exec the program*/
-			return_value = execve(data->tokens[0], data->tokens, data->env);
-			if (return_value == -1) /* if error when execve*/
-				perror(data->command_name), exit(EXIT_FAILURE);
+			value = execve(data->tokens[0], data->tokens, data->env);
+			if (value == -1) /* if error when execve*/
+				perror(data->command), exit(EXIT_FAILURE);
 		}
 		else
 		{/* I am the father, I wait and check the exit status of the child */
