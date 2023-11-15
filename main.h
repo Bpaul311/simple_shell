@@ -67,41 +67,54 @@ int count_occurrences(char *str, char *ch);
 
 /*======== alliasses.c ========*/
 int append_string(char *buffer, char *str_to_add);
-int print_alias_info(data_of_program *data, char *alias);
-char *retrieve_alias_value(data_of_program *data, char *alias);
-int add_alias(char *alias_name, data_of_program *data);
+int print_alias_info(ProgramData *data, char *alias);
+char *retrieve_alias_value(ProgramData *data, char *alias);
+int add_alias(char *alias_name, ProgramData *data);
 
 /*======== freeing.c ========*/
 void free_pointers_array(char **pointers_array);
-void free_tokens_and_input(data_of_program *data);
-void free_everything(data_of_program *data);
+void free_tokens_and_input(ProgramData *data);
+void free_everything(ProgramData *data);
 
 /*======== print_functions.c ========*/
 int _printf(char *str);
 int _print_err(char *str);
 
 /*========  readline.c  ========*/
-int read_line(data_of_program *data);
+int read_line(ProgramData *data);
 int split_logical_operators(char *commands_array[], int i, char operators_array[]);
 int split_and_duplicate(char *commands_array[], int i, int j, char operators_array[], char operator);
 
 /*======== tokenize.c ========*/
-void split(data_of_program *data);
+void split(ProgramData *data);
 char *str_tok(char *line, char *delim);
 
 
 /*======== environment.c ========*/
+<<<<<<< HEAD
+int env_remove_key(char *key, ProgramData *data);
+char *set_env(char *name, ProgramData *data, int value);
+void print_env(ProgramData *data);
+=======
 int env_remove_key(char *key, data_of_program *data);
 char *set_env(char *name, int value, data_of_program *data);
 void print_env(data_of_program *data);
+>>>>>>> 0dd653853e07398aa536b46df74ac12696a389b3
 
 /*======== main.c  ========*/
 void handle_EOF(int sig UNUSED);
-void display_message(char *msg_terminal, data_of_program *data);
+void display_message(char *msg_terminal, ProgramData *data);
 int is_interactive(int ac);
 void initialise_data(ProgramData *data, char **av, char **env, int ac);
 
 /*======== find_errors.c  ========*/
+<<<<<<< HEAD
+void print_common_error(ProgramData *data, char *n_as_string);
+void print_specific_error(ProgramData *data, int errorcode);
+void print_error_message(int errorcode, ProgramData *data);
+
+
+=======
 void print_common_error(data_of_program *data, char *n_as_string);
 void print_specific_error(data_of_program *data, int errorcode);
 void print_error_message(int errorcode, data_of_progrram *data);
@@ -121,4 +134,5 @@ void free_pointers_array(char **pointers_array);
 int find_program(data_of_program *data);
 char **find_path(data_of_program *data);
 int find_file(char *full_path);
+>>>>>>> 0dd653853e07398aa536b46df74ac12696a389b3
 #endif

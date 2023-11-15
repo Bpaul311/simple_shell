@@ -6,7 +6,7 @@
    * @data: A pointer to program's data
    * Return: An array of the tokens.
    */
-void split(data_of_program *data)
+void split(ProgramData *data)
 {
 	char *delim = " \t";
 	int i, j, num_of_tokens = 2, len;

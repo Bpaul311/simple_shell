@@ -33,7 +33,7 @@ int append_string(char *buffer, char *str_to_add)
  *
  * Return: 0 if successful, or specified error code.
  */
-int print_alias_info(data_of_program *data, char *alias)
+int print_alias_info(ProgramData *data, char *alias)
 {
 	int i, j, alias_len;
 	char buffer[250] = {'\0'};
@@ -70,7 +70,7 @@ int print_alias_info(data_of_program *data, char *alias)
  *
  * Return: The value of the alias, or NULL if not found.
  */
-char *retrieve_alias_value(data_of_program *data, char *alias)
+char *retrieve_alias_value(ProgramData *data, char *alias)
 {
 	char *value;
 	int i, alias_len;
@@ -103,7 +103,7 @@ char *retrieve_alias_value(data_of_program *data, char *alias)
  *
  * Return: 0 if successful, 1 otherwise.
  */
-int add_alias(char *alias_name, data_of_program *data)
+int add_alias(char *alias_name, ProgramData *data)
 {
 	int i, j;
 	char alias_buffer[250] = {'\0'}, *alias_value = NULL;

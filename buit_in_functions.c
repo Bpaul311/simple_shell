@@ -4,7 +4,7 @@
  * @data: the data structure
  * Return: 0 on success
  */
-int custom_exit(data_of_program *data)
+int custom_exit(ProgramData *data)
 {
 	int i;
 
@@ -31,7 +31,7 @@ int custom_exit(data_of_program *data)
  * @data: A struct containing the program's data.
  * Return: 0 on success and another number if it doesnot
  */
-int unset_env(data_of_program *data)
+int unset_env(ProgramData *data)
 {
 	if (data->tokens[1] == NULL)
 		return (0);
@@ -51,7 +51,7 @@ int unset_env(data_of_program *data)
  * @data: The struct for the program's data
  * Return: Zero if success, or another number if specified in the arguments
  */
-int builtin_set_env(data_of_program *data)
+int builtin_set_env(ProgramData *data)
 {
 	if (data->tokens[1] == NULL || data->tokens[2] == NULL)
 		return (0);
@@ -71,7 +71,7 @@ int builtin_set_env(data_of_program *data)
  * @data: A structure containing program data.
  * Return: Zero on success, or a non-zero value if specified in the arguments.
  */
-int Display_env(data_of_program *data)
+int Display_env(ProgramData *data)
 {
 	int i;
 	char cpname[50] = {'\0'};

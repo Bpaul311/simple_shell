@@ -5,7 +5,7 @@
  * @new_dir: Path to be set as the working directory.
  * Return: 0 on success, or other number if its specified in the args
  */
-int set_directory(data_of_program *data, char *new_dir)
+int set_directory(ProgramData *data, char *new_dir)
 {
 	char old_dir[128] = {0};
 	int err_found = 0;
@@ -30,7 +30,7 @@ int set_directory(data_of_program *data, char *new_dir)
  * @data: A struct containing the program's data.
  * Return: 0 on Success, or other number if its specified in the args
  */
-int cd(data_of_program *data)
+int cd(ProgramData *data)
 {
 	char *dir_home = env_get_key("HOME", data), *dir_old = NULL;
 	char old_dir[128] = {0};
@@ -67,22 +67,22 @@ int cd(data_of_program *data)
  * @data: A struct containing the program's data.
  * Return: 0 on success, or other number if specified in the args.
  */
-int alias_handler(data_of_program *data)
+int alias_handler(ProgramData *data)
 {
-    int i = 0;
+	int i = 0;
 
     /* if there are no arguments, print all aliases */
-    if (data->tokens[1] == NULL)
-        return (print_alias(data, NULL));
+	if (data->tokens[1] == NULL)
+	return (print_alias(data, NULL));
 
-    for (i = 1; data->tokens[i] != NULL; i++) {
-        /* if there are arguments, set or print each alias */
-        if (count_characters(data->tokens[i], "="))
-            set_alias(data->tokens[i], data);
-        else
-            print_alias(data, data->tokens[i]);
-    }
+	for (i = 1; data->tokens[i] != NULL; i++)
+	{
+	/* if there are arguments, set or print each alias */
+	if (count_characters(data->tokens[i], "="))
+		set_alias(data->tokens[i], data);
+	else
+		print_alias(data, data->tokens[i]);
+	}
 
-    return (0);
+	return (0);
 }
-

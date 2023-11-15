@@ -6,7 +6,7 @@
  * Return: 0 on success, otherwise -1.
  */
 
-int execute_command(data_of_program *data)
+int execute_command(ProgramData *data)
 {
 	int value = 0, status;
 	pid_t pid;
@@ -15,18 +15,15 @@ int execute_command(data_of_program *data)
 	if (value != -1)
 		return (value);
 
-	/* check for program file system */
-	value = find_program(data);
+	value = find_prog(data);
 	if (value)
 		return (value);
 	else
-	{
-		pid = fork();
 
 		if (pid == -1)
 		{
 			perror("fork");
-			perror(data->command_name);
+			perror(data->command);
 			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
@@ -34,6 +31,7 @@ int execute_command(data_of_program *data)
 			value = execve(data->tokens[0], data->tokens, data->env);
 			if (value == -1) /* if error when execve*/
 				perror(data->command_name), exit(EXIT_FAILURE);
+				perror(data->command), exit(EXIT_FAILURE);
 		}
 		else
 		{/* I am the father, I wait and check the exit status of the child */

@@ -4,7 +4,7 @@
  * @data: A struct containing the program's data.
  * @n_as_string: String representation of a number.
  */
-void print_common_error(data_of_program *data, char *n_as_string)
+void print_common_error(ProgramData *data, char *n_as_string)
 {
 	_printe(data->program_name);
 	_printe(": ");
@@ -18,7 +18,7 @@ void print_common_error(data_of_program *data, char *n_as_string)
  * @data: A struct containing the program's data.
  * @errorcode: The error code.
  */
-void print_specific_error(data_of_program *data, int errorcode)
+void print_specific_error(ProgramData *data, int errorcode)
 {
 	if (errorcode == 2)
 	{
@@ -37,13 +37,14 @@ void print_specific_error(data_of_program *data, int errorcode)
  * @data: A struct containing the program's data.
  * @errorcode: The error code.
  */
-void print_error_message(int errorcode, data_of_progrram *data) {
-    char n_as_string[10] = {'\0'};
+void print_error_message(int errorcode, ProgramData *data)
+	{
+	char n_as_string[10] = {'\0'};
 
-    n_as_string = itoa(data->exec_counter);
+	n_as_string = itoa(data->exec_counter);
 
-    print_common_error(data, n_as_string);
-    if (errorcode == 2 || errorcode == 3)
+	print_common_error(data, n_as_string);
+	if (errorcode == 2 || errorcode == 3)
 	{
 		print_specific_error(data, errorcode);
 	}

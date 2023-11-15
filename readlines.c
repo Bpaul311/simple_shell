@@ -61,7 +61,7 @@ int split_logical_operators(char *commands_array[], int i, char operators_array[
 *
 * Return: read count bytes.
 */
-int read_line(data_of_program *data)
+int read_line(ProgramData *data)
 {
 	char buff[BUFFER_SIZE] = {'\0'};
 	static char *commands_array[50] = {NULL};

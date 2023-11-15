@@ -28,7 +28,7 @@ int find_file(char *full_path)
  * @data: A pointer to program's data
  * Return: Path array of directories
  */
-char **find_path(data_of_program *data)
+char **find_path(ProgramData *data)
 {
 	int i = 0;
 	int num_dirs = 2;
@@ -73,7 +73,7 @@ char **find_path(data_of_program *data)
  * @data: A pointer to program's data.
  * Return: 0 on success, otherwise error code is returned.
  */
-int find_program(data_of_program *data)
+int find_program(ProgramData *data)
 {
 	int i = 0, ret_code = 0;
 	char **dirs;
