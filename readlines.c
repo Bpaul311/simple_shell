@@ -1,17 +1,20 @@
 #include "main.h"
+
 /**
- * split_and_duplicate - Split the line when a logical operator is found and duplicate the strings.
+ * split_and_duplicate - Split and duplicate a line when operator is found
  * @commands_array: An array of commands.
  * @i: Index to be checked.
- * @j: Counter variable for the character index.
+ * @j: Counter variable for character index.
  * @operators_array: An array of the logical operators for each previous command.
  * @operator: The logical operator ('&' or '|').
  *
  * Return: Index of the last command.
  */
+
 int split_and_duplicate(char *commands_array[], int i, int j, char operators_array[], char operator)
 {
 	char *temp = commands_array[i];
+
 	commands_array[i][j] = '\0';
 	commands_array[i] = _strdup(commands_array[i]);
 	commands_array[i + 1] = _strdup(temp + j + 2);
@@ -20,7 +23,7 @@ int split_and_duplicate(char *commands_array[], int i, int j, char operators_arr
 	free(temp);
 	j = 0;
 
-	return i;
+	return (i);
 }
 
 /**
@@ -31,6 +34,7 @@ int split_and_duplicate(char *commands_array[], int i, int j, char operators_arr
  *
  * Return: Index of the last command.
  */
+
 int split_logical_operators(char *commands_array[], int i, char operators_array[])
 {
 	int j;
@@ -48,7 +52,7 @@ int split_logical_operators(char *commands_array[], int i, char operators_array[
 		}
 	}
 
-	return i;
+	return (i);
 }
 
 /**

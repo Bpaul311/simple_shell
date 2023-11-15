@@ -6,25 +6,25 @@
  */
 int custom_exit(data_of_program *data)
 {
-    int i;
+	int i;
 
-    if (data->tokens[1])
-    {
-        i = 0;
-        while (data->tokens[1][i])
-        {
-            if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9') && data->tokens[1][i] != '+')
-            {
-                err_num = 2;
-                return (2);
-            }
-            i++;
-        }
-        err_num = _atoi(data->tokens[1]);
-    }
+	if (data->tokens[1])
+	{
+	i = 0;
+	while (data->tokens[1][i])
+		{
+		if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9') && data->tokens[1][i] != '+')
+		{
+			err_num = 2;
+			return (2);
+		}
+		i++;
+		}
+		err_num = _atoi(data->tokens[1]);
+	}
 
-    free_everything(data);
-    exit(errno);
+	free_everything(data);
+	exit(errno);
 }
 /**
  * unset_env - Removes the environmnent.
@@ -47,7 +47,7 @@ int unset_env(data_of_program *data)
 }
 
 /**
- * set_env - set the environment.
+ * builtin_set_env - set the environment.
  * @data: The struct for the program's data
  * Return: Zero if success, or another number if specified in the arguments
  */
@@ -71,7 +71,7 @@ int builtin_set_env(data_of_program *data)
  * @data: A structure containing program data.
  * Return: Zero on success, or a non-zero value if specified in the arguments.
  */
-int Dsiplay_env(data_of_program *data)
+int Display_env(data_of_program *data)
 {
 	int i;
 	char cpname[50] = {'\0'};

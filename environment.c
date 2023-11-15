@@ -77,12 +77,11 @@ char *set_env(char *name, data_of_program *data, int value)
 	return (0);
 }
 /**
- * remove_env - Remove key from the env.
+ * env_remove_key - Remove a key from the environment.
  * @key: Key to be removed.
  * @data: A struct containing the program's data.
- * Return: 1 if the key was removed or 0 if the key does not exist;
+ * Return: 1 if the key was removed, 0 if the key does not exist.
  */
-
 int env_remove_key(char *key, data_of_program *data)
 {
 	int i, len;

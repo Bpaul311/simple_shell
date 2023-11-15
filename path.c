@@ -24,7 +24,7 @@ int find_file(char *full_path)
 	return (127);
 }
 /**
- * find_path - Tokenize path in the dirs and return it 
+ * find_path - Tokenize path in the dirs and return it
  * @data: A pointer to program's data
  * Return: Path array of directories
  */
