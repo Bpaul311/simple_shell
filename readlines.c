@@ -66,7 +66,7 @@ int read_line(data_of_program *data)
 
 	/* check if no more commands exist in the array */
 	/* and checks for logical operators */
-	if (!commands_array[0] || (operators_array[0] == '&' && errno != 0) ||
+	if (!commands_array[0] || (operators_array[0] == '&' && err_num != 0) ||
 		(operators_array[0] == '|' && err_num == 0))
 	{
 		/*free the memory allocated in the array if, indeed, it exists */
