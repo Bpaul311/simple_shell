@@ -1,57 +1,49 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-
-void _print(const char *str)
-{
-	printf("%s", str);
+/**
+ * print_common_error - Print common part of the error message.
+ * @data: A struct containing the program's data.
+ * @n_as_string: String representation of a number.
+ */
+void print_common_error(data_of_program *data, char *n_as_string) {
+    _printe(data->program_name);
+    _printe(": ");
+    _printe(n_as_string);
+    _printe(": ");
+    _printe(data->command_name);
 }
 
-void _print_errors(int error_found, ProgramData *data)
-{
-
-	char str[100] = {"\0"};
-
-
-	if  (error_found == 1)
-	{
-		printf("Error 1: This can't be executed\n");
-	}
-
-	else if (error_found == 2 || error_found == 3)
-	{
-		_print_err(data->name_of_program);
-		_print_err(str);
-		_print_err(":");
-		_print_err(data->tokens[0]);
-		_print_err("\n");
-	}
-	else if (error_found == 200)
-	{
-		_print_err(data->name_of_program);
-		_print_err(str);
-		_print_err(":");
-		_print_err(data->command_name);
-		_print_err(": no error found\n");
-
-	}
-	else if (error_found == 210)
-	{
-		_print_err(data->name_of_program);
-		_print_err(str);
-		_print_err(":");
-		_print_err(data->command_name);
-		_print_err(": no access granted\n");
-	}
-	else
-	{
-		printf("No errors found");
-	}
-
+/**
+ * print_specific_error - Print specific details of the error message.
+ * @data: A struct containing the program's data.
+ * @errorcode: The error code.
+ */
+void print_specific_error(data_of_program *data, int errorcode) {
+    if (errorcode == 2) {
+        _printe(": Illegal number: ");
+    } else if (errorcode == 3) {
+        _printe(": can't cd to ");
+    }
+    _printe(data->tokens[1]);
+    _printe("\n");
 }
 
-void extended_to_string(extended num, char *buff, int size)
-{
-	itoa(num, buff, 10);
+/**
+ * print_error_message - Print error message based on the error code.
+ * @data: A struct containing the program's data.
+ * @errorcode: The error code.
+ */
+void print_error_message(int errorcode, data_of_progrram *data) {
+    char n_as_string[10] = {'\0'};
+    long_to_string((long)data->exec_counter, n_as_string, 10);
+
+    print_common_error(data, n_as_string);
+
+    if (errorcode == 2 || errorcode == 3) {
+        print_specific_error(data, errorcode);
+    } else if (errorcode == 127) {
+        _printe(": not found\n");
+    } else if (errorcode == 126) {
+        _printe(": Permission denied\n");
+    }
 }
+
