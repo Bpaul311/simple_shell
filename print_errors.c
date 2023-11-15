@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 void _print(const char *str)
 {
 	printf("%s", str);
@@ -15,7 +16,7 @@ void _print_errors(int error_found, ProgramData *data)
 
 	if  (error_found == 1)
 	{
-        	printf("Error 1: This can't be executed\n");
+		printf("Error 1: This can't be executed\n");
 	}
 
 	else if (error_found == 2 || error_found == 3)
@@ -33,7 +34,7 @@ void _print_errors(int error_found, ProgramData *data)
 		_print_err(":");
 		_print_err(data->command_name);
 		_print_err(": no error found\n");
-    
+
 	}
 	else if (error_found == 210)
 	{
