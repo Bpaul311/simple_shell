@@ -92,7 +92,7 @@ char *str_tok(char *line, char *delim);
 
 /*======== environment.c ========*/
 int env_remove_key(char *key, data_of_program *data);
-char *set_env(char *name, data_of_program *data, int value);
+char *set_env(char *name, int value, data_of_program *data);
 void print_env(data_of_program *data);
 
 /*======== main.c  ========*/
@@ -105,6 +105,20 @@ void initialise_data(ProgramData *data, char **av, char **env, int ac);
 void print_common_error(data_of_program *data, char *n_as_string);
 void print_specific_error(data_of_program *data, int errorcode);
 void print_error_message(int errorcode, data_of_progrram *data);
-
-
+/*======== builtins.c  ========*/
+int Display_env(data_of_program *data);
+int builtin_set_env(data_of_program *data);
+int unset_env(data_of_program *data);
+int custom_exit(data_of_program *data);
+int find_builtin(data_of_program *data);
+/*======== execute.c  ========*/
+int execute_command(data_of_program *data)
+/*======== freeing.c  ========*/
+void free_everything(data_of_program *data);
+void free_tokens_and_input(data_of_program *data);
+void free_pointers_array(char **pointers_array);
+/*======== path.c  ========*/
+int find_program(data_of_program *data);
+char **find_path(data_of_program *data);
+int find_file(char *full_path);
 #endif
