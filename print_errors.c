@@ -37,22 +37,13 @@ void print_specific_error(data_of_program *data, int errorcode)
  * @data: A struct containing the program's data.
  * @errorcode: The error code.
  */
-<<<<<<< HEAD
 void print_error_message(int errorcode, data_of_progrram *data) {
     char n_as_string[10] = {'\0'};
 
     n_as_string = itoa(data->exec_counter);
-=======
-void print_error_message(int errorcode, data_of_progrram *data)
-{
-	char n_as_string[10] = {'\0'};
->>>>>>> 44e6ecef980ac95bba90a15a2401d8698c1680d8
 
-	long_to_string((long)data->exec_counter, n_as_string, 10);
-
-	print_common_error(data, n_as_string);
-
-	if (errorcode == 2 || errorcode == 3)
+    print_common_error(data, n_as_string);
+    if (errorcode == 2 || errorcode == 3)
 	{
 		print_specific_error(data, errorcode);
 	}

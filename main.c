@@ -6,24 +6,19 @@
  * @env: Array of strings containing the environment variables.
  * Return: 0 on success, non-zero on failure.
  */
-
+int main(int argc, char *argv[], char *env[])
+{
 	initialise_data(&info, argc, argv, env);
 	signal(SIGINT, handle_EOF);
 	if (is - interactive(ac))
 	{
-		err_num = 2;
+		errno = 2;
 		message = MESSAGE;
 	}
-		else
-		{
-			err_num = 0;
-
-
-	read_line(&info);
-			read_line(&info);
-
-			return (0);
-		}
+		err_num = 0;
+		display_message(message, &info);
+		return (0);
+}
 /**
  * initialise_data - Initializes program data into the structure
  * @data: A pointer to data structure
@@ -116,7 +111,7 @@ void display_message(char *msg_terminal, data_of_program *data)
 			split(data);
 			if (data->tokens[0])
 			{ /* if a text is given to msg_terminal, exec */
-				err_code = execute(data);
+				err_code = execute_command(data);
 				if (err_code != 0)
 					_print_error(err_code, data);
 			}

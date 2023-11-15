@@ -95,6 +95,16 @@ int env_remove_key(char *key, data_of_program *data);
 char *set_env(char *name, data_of_program *data, int value);
 void print_env(data_of_program *data);
 
+/*======== main.c  ========*/
+void handle_EOF(int sig UNUSED);
+void display_message(char *msg_terminal, data_of_program *data);
+int is_interactive(int ac);
+void initialise_data(ProgramData *data, char **av, char **env, int ac);
+
+/*======== find_errors.c  ========*/
+void print_common_error(data_of_program *data, char *n_as_string);
+void print_specific_error(data_of_program *data, int errorcode);
+void print_error_message(int errorcode, data_of_progrram *data);
 
 
 #endif
