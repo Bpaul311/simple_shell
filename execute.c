@@ -5,10 +5,13 @@
 #include <sys/wait.h>
 
 /**
- * @execute_command: Executes a command in a child process.
- * @param command The command to execute.
- * @param arguments An array of strings representing command-line arguments.
- * @param environment An array of strings representing environment variables.
+ * execute_command - Executes a command in a child process.
+ * @command: The command to execute.
+ * @arguments: An array of strings representing command-line arguments.
+ * @environment: An array of strings representing environment variables.
+ *
+ * This function executes a command in a child process, using the provided
+ * command, arguments, and environment.
  */
 
 void execute_command(char *command, char *arguments[], char *environment[])
@@ -33,6 +36,7 @@ void execute_command(char *command, char *arguments[], char *environment[])
 	else
 	{
 		int status;
+
 		waitpid(pid, &status, 0);
 
 	if (WIFEXITED(status))
@@ -47,7 +51,12 @@ void execute_command(char *command, char *arguments[], char *environment[])
 }
 
 /**
- * Entry point of the program.
+ * main - Entry point of the program.
+ *
+ * This is the entry point of the program. It sets up the command, arguments,
+ * and environment for the execute_command function and calls it.
+ *
+ * Return: Always 0.
  */
 
 int main(void)

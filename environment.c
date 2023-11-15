@@ -51,17 +51,18 @@ char *fetch_info(char *name, data_of_program *data)
 
 char *set_env(char *name, data_of_program *data, int value)
 {
-        int i, len, key_exists = 0;
+	int i, len, key_exists = 0;
 
-        /* validate the arguments */
-        if (key == NULL || data->env == NULL ||  value == NULL)
-                return (NULL);
-        len = _strlen(name);
-        for (i = 0; data->env[i]; i++)
-        {/* Iterates through the environ and check for coincidence of the vame */
-                if (_strcmp(name, data->env[i]) &&
-                 data->env[i][len] == '=')
-                {
+	/* validate the arguments */
+	if (key == NULL || data->env == NULL ||  value == NULL)
+		return (NULL);
+	len = _strlen(name);
+	for (i = 0; data->env[i]; i++)
+	{
+		/* Iterates through the environ and check for coincidence of the vame */
+		if (_strcmp(name, data->env[i]) &&
+		data->env[i][len] == '=')
+		{
 			key_exists = 1;
 			free(data->env[i]);
 			break;
@@ -69,7 +70,7 @@ char *set_env(char *name, data_of_program *data, int value)
 	}
 	data->env[i] = _strcat(_str_duplicate(key), "=");
 	data->env[i] = _strcat(data->env[i], value);
-	if(!key_exists)
+	if (!key_exists)
 	{
 		data->env[i + 1] = NULL;
 	}
@@ -86,15 +87,16 @@ int env_remove_key(char *key, data_of_program *data)
 {
 	int i, len;
 
-        /* validate the arguments */
-        if (key == NULL || data->env == NULL)
-                return (NULL);
-        len = _strlen(name);
-        for (i = 0; data->env[i]; i++)
-        {/* Iterates through the environ and check for coincidence of the vame */
-                if (_strcmp(name, data->env[i]) &&
-                 data->env[i][len] == '=')
-                {
+	/* validate the arguments */
+	if (key == NULL || data->env == NULL)
+		return (NULL);
+	len = _strlen(name);
+	for (i = 0; data->env[i]; i++)
+	{
+		/* Iterates through the environ and check for coincidence of the vame */
+		if (_strcmp(name, data->env[i]) &&
+		data->env[i][len] == '=')
+		{
 			free(data->env[i]);
 			i++;
 			for (; data->env[i]; i++)
