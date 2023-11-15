@@ -70,11 +70,25 @@ int append_string(char *buffer, char *str_to_add);
 int print_alias_info(data_of_program *data, char *alias);
 char *retrieve_alias_value(data_of_program *data, char *alias);
 int add_alias(char *alias_name, data_of_program *data);
+
 /*======== freeing.c ========*/
 void free_pointers_array(char **pointers_array);
 void free_tokens_and_input(data_of_program *data);
 void free_everything(data_of_program *data);
+
 /*======== print_functions.c ========*/
 int _printf(char *str);
 int _print_err(char *str);
+
+/*========  readline.c  ========*/
+int read_line(data_of_program *data);
+int split_logical_operators(char *commands_array[], int i, char operators_array[]);
+int split_and_duplicate(char *commands_array[], int i, int j, char operators_array[], char operator);
+
+/*======== tokenize.c ========*/
+void split(data_of_program *data);
+char *str_tok(char *line, char *delim);
+
+
+
 #endif
