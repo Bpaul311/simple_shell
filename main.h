@@ -90,5 +90,12 @@ void split(data_of_program *data);
 char *str_tok(char *line, char *delim);
 
 
+/*======== environment.c ========*/
+int env_remove_key(char *key, data_of_program *data);
+char *set_env(char *name, data_of_program *data, int value);
+void print_env(data_of_program *data);
+void print_env(data_of_program *data);
+
+
 
 #endif

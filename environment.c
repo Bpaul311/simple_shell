@@ -10,8 +10,8 @@ void print_env(data_of_program *data)
 
 	for (i = 0; data->env[i]; i++)
 	{
-		_print(data->env[i]);
-		_print("\n");
+		_printf(data->env[i]);
+		_printf("\n");
 	}
 }
 /**
