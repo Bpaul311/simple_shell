@@ -62,7 +62,6 @@ char *itoa(int num)
 }
 /**
  * _atoi - converts string to an int.
- *
  * @str: A pointer to original string.
  * Return: int of string or 0.
  */
@@ -88,6 +87,14 @@ int _atoi(char *str)
 	}
 	return ((int) (number * sign));
 }
+
+/**
+ * count_occurrences - Count the occurrences of specific characters
+ * @str: The input string to search.
+ * @ch: The character to count.
+ * Return: The number of occurrences of the character in the string.
+ */
+
 int count_occurrences(char *str, char *ch)
 {
 	if (str == NULL || ch == NULL)
@@ -95,8 +102,10 @@ int count_occurrences(char *str, char *ch)
 
 	int i = 0, counter = 0;
 
-	while (str[i]) {
-		if (str[i] == ch[0]) {
+	while (str[i])
+	{
+		if (str[i] == ch[0])
+		{
 			counter++;
 		}
 		i++;

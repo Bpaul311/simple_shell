@@ -7,11 +7,11 @@
  */
 int append_string(char *buffer, char *str_to_add)
 {
-	int length,i;
+	int length, i;
 
 	if (buffer == NULL || str_to_add == NULL)
-		return 0;
-       	while (buffer[length] != '\0')
+		return (0);
+	while (buffer[length] != '\0')
 		length++;
 	i = 0;
 	while (str_to_add[i] != '\0')
@@ -35,33 +35,33 @@ int append_string(char *buffer, char *str_to_add)
  */
 int print_alias_info(data_of_program *data, char *alias)
 {
-    int i, j, alias_len;
-    char buffer[250] = {'\0'};
+	int i, j, alias_len;
+	char buffer[250] = {'\0'};
 
-    if (data->alias_list)
-    {
-        alias_len = _strlen(alias);
-        for (i = 0; data->alias_list[i]; i++)
-        {
-            if (alias == NULL || (_strcmp(data->alias_list[i], alias, alias_len)
-                                  && data->alias_list[i][alias_len] == '='))
-            {
-                for (j = 0; data->alias_list[i][j]; j++)
-                {
-                    buffer[j] = data->alias_list[i][j];
-                    if (data->alias_list[i][j] == '=')
-                        break;
-                }
-                buffer[j + 1] = '\0';
-                append_string(buffer, "'");
-                append_string(buffer, data->alias_list[i] + j + 1);
-                append_string(buffer, "'\n");
-                _printf(buffer);
-            }
-        }
-    }
+	if (data->alias_list)
+	{
+		alias_len = _strlen(alias);
+		for (i = 0; data->alias_list[i]; i++)
+		{
+			if (alias == NULL || (_strcmp(data->alias_list[i], alias, alias_len)
+				&& data->alias_list[i][alias_len] == '='))
+		{
+			for (j = 0; data->alias_list[i][j]; j++)
+			{
+				buffer[j] = data->alias_list[i][j]
+				if (data->alias_list[i][j] == '=')
+				break;
+			}
+		buffer[j + 1] = '\0';
+		append_string(buffer, "'");
+		append_string(buffer, data->alias_list[i] + j + 1);
+		append_string(buffer, "'\n");
+		_printf(buffer);
+		}
+		}
+	}
 
-    return (0);
+	return (0);
 }
 /**
  * retrieve_alias_value - Retrieve the value of an alias from the alias list.
@@ -105,42 +105,43 @@ char *retrieve_alias_value(data_of_program *data, char *alias)
  */
 int add_alias(char *alias_name, data_of_program *data)
 {
-    int i, j;
-    char alias_buffer[250] = {'\0'}, *alias_value = NULL;
+	int i, j;
+	char alias_buffer[250] = {'\0'}, *alias_value = NULL;
 
-    /* Validate the arguments */
-    if (alias_name == NULL || data->alias_list == NULL)
-        return (1);
+	/* Validate the arguments */
+	if (alias_name == NULL || data->alias_list == NULL)
+	return (1);
 
-    /* Iterates alias to find = char */
-    for (i = 0; alias_name[i]; i++)
-        if (alias_name[i] != '=')
-            alias_buffer[i] = alias_name[i];
-        else
-        {/* search if the value of the alias is another alias */
-            alias_value = retrieve_alias_value(data, alias_name + i + 1);
-            break;
-        }
+	/* Iterates alias to find = char */
+	for (i = 0; alias_name[i]; i++)
+	if (alias_name[i] != '=')
+	alias_buffer[i] = alias_name[i];
+	else
+	{
+		/* search if the value of the alias is another alias */
+		alias_value = retrieve_alias_value(data, alias_name + i + 1);
+		break;
+	}
 
-    /* Iterates through the alias list and checks for the varname coincidence */
-    for (j = 0; data->alias_list[j]; j++)
-        if (_strcmp(alias_buffer, data->alias_list[j], i) &&
-            data->alias_list[j][i] == '=')
-        {/* if the alias already exists */
-            free(data->alias_list[j]);
-            break;
-        }
+	/* Iterates through the alias list and checks for the varname coincidence */
+	for (j = 0; data->alias_list[j]; j++)
+	if (_strcmp(alias_buffer, data->alias_list[j], i) &&
+	data->alias_list[j][i] == '=')
+	{
+		/* if the alias already exists */
+		free(data->alias_list[j]);
+		break;
+	}
 
-    /* Add the alias */
-    if (alias_value)
-    {/* if the alias value already exists */
-        buffer_append(alias_buffer, "=");
-        buffer_append(alias_buffer, alias_value);
-        data->alias_list[j] = _str_duplicate(alias_buffer);
-    }
-    else /* if the alias value does not exist */
-        data->alias_list[j] = _str_duplicate(alias_name);
-    return (0);
+	/* Add the alias */
+	if (alias_value)
+	{
+		/* if the alias value already exists */
+		buffer_append(alias_buffer, "=");
+		buffer_append(alias_buffer, alias_value);
+		data->alias_list[j] = _str_duplicate(alias_buffer);
+	}
+	else /* if the alias value does not exist */
+	data->alias_list[j] = _str_duplicate(alias_name);
+	return (0);
 }
-
-
