@@ -1,39 +1,32 @@
-#include <stdio.h>
-
-
-int builtin_exit(data_of_program *data)
+#include "main.h"
+/**
+ * find_builtin- search for match and execute the associated builtin func.
+ * @data: A struct containing the program's data.
+ * Return: Returns the return of the function executed if there is a match,
+ * otherwise returns -1.
+ **/
+int find_builtin(data_of_program *data)
 {
 
-    printf("Exiting...\n");
+    int counter;
 
-    return (0);
-}
-
-int builtin_alias(data_of_program *data)
-{
-    printf("Executing alias command...\n");
-
-    return 0;
-}
-
-int builtin_t_list(data_of_program *data)
-{
-
-    int counters;
-
-    builtin_t operators[] = {
-        {"exit", builtin_exit},
-        {"alias", builtin_alias},
+    builtin_t arr[] = {
+        {"exit", custom_exit},
+        {"alias", alias_handler},
+	{"cd", cd},
+	{"env", builtin_env},
+	{"setenv", builtin_set_env},
+	{"unsetenv", builtin_unset_env},
         {NULL, NULL}
-    }
+    
 };
 
-for (counters = 0; operators[counters].func_name != NULL; counters++)
+for (counter = 0; arr[counter].func_name != NULL; counter++)
     {
-        if (_strcmp(operators[counters].func_name, data->command))
-        {
-            return (operators[counters].function(data));
-        }
+        if (_strcmp(arr[counter].func_name, data->command))
+        
+            return (arr[counter].function(data));
     }
     
     return (-1);
+ }

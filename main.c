@@ -40,12 +40,8 @@ void initialise_data(ProgramData *data, char **av, char **env, int ac)
 	data->input = NULL;
 	data->command = NULL;
 	data->exec_num = 0;
-	< < < < < < < HEAD
 	data->token = NULL;
-	= = = = = = =
-	data->status  = 0;
 	data->token = NULL;
-	> > > > > > > de875e9eea5c237ff95b6d989c15560235923dd0
 	data->alias_list = NULL;
 	if (ac == 1)
 		data->file_descriptor = STDIN_FILENO;
@@ -74,7 +70,6 @@ void initialise_data(ProgramData *data, char **av, char **env, int ac)
 	{
 		data->alias_list[i] = NULL;
 	}
-	data->pid = itoa(getpid());
 }
 /**
  * is_interactive - returns true if shell is interactive mode
@@ -98,7 +93,6 @@ void handle_EOF(int sig UNUSED)
 	_printf(MESSAGE);
 }
 /**
-<<<<<<< HEAD
  * display_message - Dispalys the message loop
  * @msg: Printed msg_terminal
  * @data: Prompt loop displays
@@ -111,66 +105,22 @@ void display_message(char *msg_terminal, data_of_program *data)
 	while (run)
 	{
 		_printf(msg);
-		err_code = string_length = _getline(data);
-
-/**
- * read_line - reads input lines from the user
- *@Data: Pointer to the program data structure
- */
-
-void read_line(ProgramData  *Data)
-{
-	char *copy_command = NULL, *full_command = NULL;
-	ssize_t chars_read = 0;
-	char *token;
-	size_t buffer = 0;
-	char *delim = " \t";
-	int num_of_tokens = 0;
-	int counter;
-	char **av;
-
-	while (1)
-	{
-
-		print(MESSAGE);
-		chars_read = getline(&full_command, &buffer, stdin);
-		if (chars_read == -1)
+		err_code = string_length = read_line(data);
+		if (err_code == EOF)
 		{
-			printf("Exiting shell ...\n");
-			break;
+			free_everything(data);
+			exit(errno); /* if EOF is the fisrt Char of string, exit*/
 		}
-	else
-	{
-		copy_command = malloc(sizeof(char) * chars_read);
-			if (copy_command == NULL)
-			{
-				perror("failed to allocate memory\n");
-				break;
+		if (string_length >= 1)
+		{
+			split(data);
+			if (data->tokens[0])
+			{ /* if a text is given to msg_terminal, exec */
+				err_code = execute(data);
+				if (err_code != 0)
+					_print_error(err_code, data);
 			}
-		copy_command = strdup(full_command);
-		token = strtok(full_command, delim);
-		while (token != NULL)
-		{
-			num_of_tokens++;
-			token = strtok(NULL, delim);
-		}
-		num_of_tokens++;
-		av = malloc(sizeof(char *) * num_of_tokens);
-		token = strtok(copy_command, delim);
-		for (counter = 0; token != NULL; counter++)
-		{
-			av[counter] = malloc(sizeof(char) * (strlen(token) + 1));
-			strcpy(av[counter], token);
-			token = strtok(NULL, delim);
-		}
-		av[counter] = NULL;
-		for (int i = 0; i < counter; i++)
-		{
-			free(av[i]);
-		}
-		free(av);
-		free(full_command);
-		free(copy_command);
+			free_recurrent_data(data);
 		}
 	}
 }

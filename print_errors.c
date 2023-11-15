@@ -34,7 +34,8 @@ void print_specific_error(data_of_program *data, int errorcode) {
  */
 void print_error_message(int errorcode, data_of_progrram *data) {
     char n_as_string[10] = {'\0'};
-    long_to_string((long)data->exec_counter, n_as_string, 10);
+
+    n_as_string = itoa(data->exec_counter);
 
     print_common_error(data, n_as_string);
 
