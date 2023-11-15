@@ -77,4 +77,5 @@ void free_everything(data_of_program *data);
 /*======== print_functions.c ========*/
 int _printf(char *str);
 int _print_err(char *str);
+void _print_errors(int error_found, ProgramData *data);
 #endif
