@@ -1,10 +1,5 @@
 #include "main.h"
 
-int is;
-char *message;
-int err_num;
-int i;
-
 /**
  * main - Entry point for the simple shell program.
  * @argc: Number of command-line arguments.
@@ -14,14 +9,17 @@ int i;
  */
 int main(int argc, char *argv[], char *env[])
 {
-	initialise_data(&info, argc, argv, env);
+
+	ProgramData data_struct = {NULL}, *data = &data_struct;
+	char *message = "";
+	initialise_data(data, argc, argv, env);
 	signal(SIGINT, handle_EOF);
 	if (is - interactive(ac))
 	{
 		errno = 2;
 		message = MESSAGE;
 	}
-		err_num = 0;
+		errno = 0;
 		display_message(message, &info);
 		return (0);
 }
@@ -114,17 +112,17 @@ void display_message(char *msg_terminal, data_of_program *data)
 
 	if (string_length >= 1)
 	{
-	split(data);
+		split(data);
 
 		if (data->tokens[0])
 		{
 		err_code = execute_command(data);
 
 		if (err_code != 0)
-		_print_error(err_code, data);
+		_print_errors(err_code, data);
 		}
 
-	free_recurrent_data(data);
+	free_tokens_and_input(data);
 	}
 	}
 }

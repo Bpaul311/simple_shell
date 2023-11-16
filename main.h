@@ -19,10 +19,10 @@
 #define UNUSED __attribute__((unused))
 /**
  * struct info - Structure for the program's data
- * @name: The name of the executable
+ * @program_name: The name of the executable
  * @input_line: Pointer to the input read for _getline
- * @command: Pointer to the first command typed by the user
- * @exec_num: Number of executed commands
+ * @command_name: Pointer to the first command typed by the user
+ * @exec_counter: Number of executed commands
  * @file_descriptor: File descriptor to the input of commands
  * @tokens: Pointer to an array of tokenized input
  * @env: Copy of the environment variables
@@ -30,10 +30,10 @@
  */
 
 typedef struct info {
-    char *name;
+    char *program_name;
     char *input_line;
-    char *command;
-    int exec_num;
+    char *command_name;
+    int exec_counter;
     int file_descriptor;
     char **tokens;
     char **env;
@@ -46,7 +46,7 @@ typedef struct info {
  * @param func_name: Name of the built-in function
  * @param function: Pointer to the function implementation
  */
-typedef struct builtin_func
+typedef struct builtin_t
 {
 	char *func_name;
 	int (*function)(ProgramData *data);
@@ -91,16 +91,10 @@ char *str_tok(char *line, char *delim);
 
 
 /*======== environment.c ========*/
-<<<<<<< HEAD
+char *fetch_info(char *name, ProgramData *data);
 int env_remove_key(char *key, ProgramData *data);
-char *set_env(char *name, ProgramData *data, int value);
+int set_env(char *name, char* value, ProgramData *data);
 void print_env(ProgramData *data);
-=======
-int env_remove_key(char *key, data_of_program *data);
-char *set_env(char *name, int value, data_of_program *data);
-void print_env(data_of_program *data);
->>>>>>> 0dd653853e07398aa536b46df74ac12696a389b3
-
 /*======== main.c  ========*/
 void handle_EOF(int sig UNUSED);
 void display_message(char *msg_terminal, ProgramData *data);
@@ -108,31 +102,23 @@ int is_interactive(int ac);
 void initialise_data(ProgramData *data, char **av, char **env, int ac);
 
 /*======== find_errors.c  ========*/
-<<<<<<< HEAD
 void print_common_error(ProgramData *data, char *n_as_string);
 void print_specific_error(ProgramData *data, int errorcode);
 void print_error_message(int errorcode, ProgramData *data);
-
-
-=======
-void print_common_error(data_of_program *data, char *n_as_string);
-void print_specific_error(data_of_program *data, int errorcode);
-void print_error_message(int errorcode, data_of_progrram *data);
 /*======== builtins.c  ========*/
-int Display_env(data_of_program *data);
-int builtin_set_env(data_of_program *data);
-int unset_env(data_of_program *data);
-int custom_exit(data_of_program *data);
-int find_builtin(data_of_program *data);
+int Display_env(ProgramData *data);
+int builtin_set_env(ProgramData *data);
+int unset_env(ProgramData *data);
+int custom_exit(ProgramData *data);
+int find_builtin(ProgramData *data);
 /*======== execute.c  ========*/
-int execute_command(data_of_program *data)
+int execute_command(ProgramData *data)
 /*======== freeing.c  ========*/
-void free_everything(data_of_program *data);
-void free_tokens_and_input(data_of_program *data);
+void free_everything(ProgramData  *data);
+void free_tokens_and_input(ProgramData  *data);
 void free_pointers_array(char **pointers_array);
 /*======== path.c  ========*/
-int find_program(data_of_program *data);
-char **find_path(data_of_program *data);
+int find_program(ProgramData  *data);
+char **find_path(ProgramData  *data);
 int find_file(char *full_path);
->>>>>>> 0dd653853e07398aa536b46df74ac12696a389b3
 #endif

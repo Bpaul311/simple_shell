@@ -14,15 +14,14 @@ int find_builtin(ProgramData *data)
 	{"exit", custom_exit},
 	{"alias", alias_handler},
 	{"cd", cd},
-	{"env", builtin_env},
+	{"env", Display_env},
 	{"setenv", builtin_set_env},
-	{"unsetenv", builtin_unset_env},
+	{"unsetenv", unset_env},
 	{NULL, NULL}
 
 };
 
 for (counter = 0; arr[counter].func_name != NULL; counter++)
-<<<<<<< HEAD
 	{
 	if (_strcmp(arr[counter].func_name, data->command))
 
@@ -31,60 +30,3 @@ for (counter = 0; arr[counter].func_name != NULL; counter++)
 
 	return (-1);
 }
-#include <stdio.h>
-
-/**
- * builtin_exit - Handles the exit built-in command.
- * @data: A pointer to program's data.
- * Return: 0.
- */
-int builtin_exit(ProgramData *data)
-{
-	printf("Exiting...\n");
-	return (0);
-}
-
-/**
- * builtin_alias - Handles the alias built-in command.
- * @data: A pointer to program's data.
- * Return: 0.
- */
-int builtin_alias(ProgramData *data)
-{
-	printf("Executing alias command...\n");
-	return (0);
-}
-
-/**
- * builtin_t_list - Executes the appropriate function based on the command.
- * @data: A pointer to program's data.
- * Return: Result of the executed function or -1 if the command is not found.
- */
-int builtin_t_list(ProgramData *data)
-{
-	int counters;
-	builtin_t operators[] = {
-		{"exit", builtin_exit},
-		{"alias", builtin_alias},
-		{NULL, NULL}
-	}
-};
-
-	for (counters = 0; operators[counters].func_name != NULL; counters++)
-	{
-		if (_strcmp(operators[counters].func_name, data->command))
-		{
-			return (operators[counters].function(data));
-		}
-	}
-	return (-1);
-=======
-    {
-        if (_strcmp(arr[counter].func_name, data->command))
-        
-            return (arr[counter].function(data));
-    }
-    
-    return (-1);
- }
->>>>>>> 0dd653853e07398aa536b46df74ac12696a389b3

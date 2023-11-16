@@ -48,18 +48,13 @@ char *fetch_info(char *name, ProgramData *data)
  * @value: New value
  * Return: a pointer to the value of the variable or NULL if it doesn't exist
  */
-
-<<<<<<< HEAD
-char *set_env(char *name, ProgramData *data, int value)
-=======
-char *set_env(char *name, int value, data_of_program *data)
->>>>>>> 0dd653853e07398aa536b46df74ac12696a389b3
+int set_env(char *name, char* value, ProgramData *data)
 {
 	int i, len, key_exists = 0;
 
 	/* validate the arguments */
 	if (key == NULL || data->env == NULL ||  value == NULL)
-		return (NULL);
+		return (1);
 	len = _strlen(name);
 	for (i = 0; data->env[i]; i++)
 	{
@@ -92,7 +87,7 @@ int env_remove_key(char *key, ProgramData *data)
 
 	/* validate the arguments */
 	if (key == NULL || data->env == NULL)
-		return (NULL);
+		return (0);
 	len = _strlen(name);
 	for (i = 0; data->env[i]; i++)
 	{
@@ -112,4 +107,3 @@ int env_remove_key(char *key, ProgramData *data)
 	}
 	return (0);
 }
-

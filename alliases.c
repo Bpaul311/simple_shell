@@ -72,7 +72,6 @@ int print_alias_info(ProgramData *data, char *alias)
  */
 char *retrieve_alias_value(ProgramData *data, char *alias)
 {
-	char *value;
 	int i, alias_len;
 
 	/* Validate the arguments */
@@ -88,8 +87,7 @@ char *retrieve_alias_value(ProgramData *data, char *alias)
 			data->alias_list[i][alias_len] == '=')
 		{
 			/* Returns the value of the alias (part after the '=' sign) when found */
-			value = data->alias_list[i] + alias_len + 1;
-			return (value);
+			return ( data->alias_list[i] + alias_len + 1);	
 		}
 	}
 

@@ -52,14 +52,14 @@ char **find_path(ProgramData *data)
 	}
 
 	/* reserve space for the array of pointers */
-	tokens = malloc(sizeof(char *) * count_dirs);
+	tokens = malloc(sizeof(char *) * num_dirs);
 
 	/*tokenize and duplicate each token of path*/
 	i = 0;
-	tokens[i] = _strdup(_strtok(PATH, ":"));
+	tokens[i] = _str_duplicate(str_tok(PATH, ":"));
 	while (tokens[i++])
 	{
-		tokens[i] = _strdup(_strtok(NULL, ":"));
+		tokens[i] = _str_duplicate(str_tok(NULL, ":"));
 	}
 
 	free(PATH);
@@ -111,7 +111,7 @@ int find_program(ProgramData *data)
 	}
 	free(data->tokens[0]);
 	data->tokens[0] = NULL;
-	free_array_of_pointers(dirs);
+	free_pointers_array(dirs);
 	return (ret_code);
 }
 

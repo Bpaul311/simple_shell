@@ -15,12 +15,12 @@ int custom_exit(ProgramData *data)
 		{
 		if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9') && data->tokens[1][i] != '+')
 		{
-			err_num = 2;
+			errno = 2;
 			return (2);
 		}
 		i++;
 		}
-		err_num = _atoi(data->tokens[1]);
+		errno = _atoi(data->tokens[1]);
 	}
 
 	free_everything(data);
@@ -87,9 +87,9 @@ int Display_env(ProgramData *data)
 			{
 				var_cpy = _str_duplicate(fetch_info(cpname, data));
 				if (var_cpy != NULL)
-					env_set_key(cpname, data->tokens[1] + i + 1, data);
-				print_environ(data);
-				if (env_get_key(cpname, data) == NULL)
+					set_env(cpname, data->tokens[1] + i + 1, data);
+				print_env(data);
+				if (fetch_info(cpname, data) == NULL)
 				{/* print the variable if it does not exist in the environ */
 					_printf(data->tokens[1]);
 					_printf("\n");
