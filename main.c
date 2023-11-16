@@ -12,6 +12,7 @@ int main(int argc, char *argv[], char *env[])
 
 	ProgramData data_struct = {NULL}, *data = &data_struct;
 	char *message = "";
+
 	initialise_data(data, argc, argv, env);
 	signal(SIGINT, handle_EOF);
 	if (is - interactive(ac))
@@ -35,10 +36,10 @@ void initialise_data(ProgramData *data, char **av, char **env, int ac)
 {
 	unsigned int counter;
 
-	data->name = av[0];
-	data->input = NULL;
-	data->command = NULL;
-	data->exec_num = 0;
+	data->program_name = av[0];
+	data->input_line = NULL;
+	data->comman_named = NULL;
+	data->exec_counter = 0;
 	data->token = NULL;
 	data->token = NULL;
 	data->alias_list = NULL;
@@ -81,8 +82,9 @@ int is_interactive(int ac)
 	return (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && ac == 1);
 }
 /**
- * handle_EOF - Display msg_terminal on a newline when the signal SIGINT is sent to the program.
- * @sig: Signal number (UNUSED, to indicate intentionally unused).
+ * handle_EOF - Display msg_terminal on a newline when
+ * the signal SIGINT is sent to the program.
+ * @UNUSED: Signal number (UNUSED, to indicate intentionally unused).
  */
 void handle_EOF(int sig UNUSED)
 {
@@ -116,7 +118,7 @@ void display_message(char *msg_terminal, data_of_program *data)
 
 		if (data->tokens[0])
 		{
-		err_code = execute_command(data);
+		err_code = exec(data);
 
 		if (err_code != 0)
 		_print_errors(err_code, data);

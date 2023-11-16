@@ -13,7 +13,8 @@ int custom_exit(ProgramData *data)
 	i = 0;
 	while (data->tokens[1][i])
 		{
-		if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9') && data->tokens[1][i] != '+')
+		if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9')
+			&& data->tokens[1][i] != '+')
 		{
 			errno = 2;
 			return (2);

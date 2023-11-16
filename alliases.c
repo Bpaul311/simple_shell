@@ -86,8 +86,7 @@ char *retrieve_alias_value(ProgramData *data, char *alias)
 		if (_strcmp(alias, data->alias_list[i], alias_len) &&
 			data->alias_list[i][alias_len] == '=')
 		{
-			/* Returns the value of the alias (part after the '=' sign) when found */
-			return ( data->alias_list[i] + alias_len + 1);	
+			return (data->alias_list[i] + alias_len + 1);
 		}
 	}
 

@@ -1,6 +1,5 @@
 #ifndef MAIN_H
 #define MAIN_H
-
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -12,10 +11,9 @@
 #include <signal.h>
 #include <limits.h>
 #include <stddef.h>
-
 /*define some important  macros */
 #define BUFSIZE 1024
-#define MESSAGE "$ " 
+#define MESSAGE "$ "
 #define UNUSED __attribute__((unused))
 /**
  * struct info - Structure for the program's data
@@ -28,79 +26,70 @@
  * @env: Copy of the environment variables
  * @alias_list: Array of pointers with aliases
  */
-
-typedef struct info {
-    char *program_name;
-    char *input_line;
-    char *command_name;
-    int exec_counter;
-    int file_descriptor;
-    char **tokens;
-    char **env;
-    char **alias_list;
-}ProgramData;
+typedef struct info
+{
+	char *program_name;
+	char *input_line;
+	char *command_name;
+	int exec_counter;
+	int file_descriptor;
+	char **tokens;
+	char **env;
+	char **alias_list;
+} ProgramData;
 
 /**
- * Structure for built-in functions
- *
- * @param func_name: Name of the built-in function
- * @param function: Pointer to the function implementation
+ * struct builtin_t - struct for the builtins
+ * @func_name: Name of the built-in function
+ * @function: Pointer to the function implementation
  */
 typedef struct builtin_t
 {
 	char *func_name;
 	int (*function)(ProgramData *data);
 } builtin_t;
-
 /*======== function_strings.c ========*/
-int _strlen(const char *s); 
+int _strlen(const char *s);
 int _strcmp(char *str1, char *str2);
 void rev_string(char *s);
 char *_strcat(char *destination, const char *source);
 char *_str_duplicate(char *str);
-
 /*======== num_strings.c ========*/
 int num_of_digits(int num);
 char *itoa(int num);
 int _atoi(char *str);
 int count_occurrences(char *str, char *ch);
-
 /*======== alliasses.c ========*/
 int append_string(char *buffer, char *str_to_add);
 int print_alias_info(ProgramData *data, char *alias);
 char *retrieve_alias_value(ProgramData *data, char *alias);
 int add_alias(char *alias_name, ProgramData *data);
-
 /*======== freeing.c ========*/
 void free_pointers_array(char **pointers_array);
 void free_tokens_and_input(ProgramData *data);
 void free_everything(ProgramData *data);
-
 /*======== print_functions.c ========*/
 int _printf(char *str);
 int _print_err(char *str);
-
 /*========  readline.c  ========*/
 int read_line(ProgramData *data);
-int split_logical_operators(char *commands_array[], int i, char operators_array[]);
-int split_and_duplicate(char *commands_array[], int i, int j, char operators_array[], char operator);
-
+int split_logical_operators(char *commands_array[], int i,
+		char operators_array[]);
+int split_and_duplicate(char *commands_array[], int i,
+		int j, char operators_array[], char operator);
 /*======== tokenize.c ========*/
 void split(ProgramData *data);
 char *str_tok(char *line, char *delim);
-
-
 /*======== environment.c ========*/
 char *fetch_info(char *name, ProgramData *data);
 int env_remove_key(char *key, ProgramData *data);
-int set_env(char *name, char* value, ProgramData *data);
+int set_env(char *name, char *value, ProgramData *data);
 void print_env(ProgramData *data);
 /*======== main.c  ========*/
 void handle_EOF(int sig UNUSED);
 void display_message(char *msg_terminal, ProgramData *data);
 int is_interactive(int ac);
 void initialise_data(ProgramData *data, char **av, char **env, int ac);
-
 /*======== find_errors.c  ========*/
 void print_common_error(ProgramData *data, char *n_as_string);
 void print_specific_error(ProgramData *data, int errorcode);
@@ -112,7 +101,8 @@ int unset_env(ProgramData *data);
 int custom_exit(ProgramData *data);
 int find_builtin(ProgramData *data);
 /*======== execute.c  ========*/
-int execute_command(ProgramData *data)
+/* exec- Execute a command with its entire path */
+int exec(ProgramData *data);
 /*======== freeing.c  ========*/
 void free_everything(ProgramData  *data);
 void free_tokens_and_input(ProgramData  *data);

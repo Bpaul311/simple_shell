@@ -15,7 +15,7 @@ int _printf(char *str)
 	return (write(STDOUT_FILENO, str, strlen(str)));
 }
 /**
- * _printerr - Display an array of chars to the STDERR
+ * _print_err - Display an array of chars to the STDERR
  * @str: A pointer to the array of chars
  * Return: the number of bytes displayed.
  * On error, -1 is returned and errno is set appropriately.

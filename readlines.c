@@ -5,13 +5,15 @@
  * @commands_array: An array of commands.
  * @i: Index to be checked.
  * @j: Counter variable for character index.
- * @operators_array: An array of the logical operators for each previous command.
+ * @operators_array: An array of the logical operators
+ * for each previous command.
  * @operator: The logical operator ('&' or '|').
  *
  * Return: Index of the last command.
  */
 
-int split_and_duplicate(char *commands_array[], int i, int j, char operators_array[], char operator)
+int split_and_duplicate(char *commands_array[],
+		int i, int j, char operators_array[], char operator)
 {
 	char *temp = commands_array[i];
 
@@ -30,12 +32,14 @@ int split_and_duplicate(char *commands_array[], int i, int j, char operators_arr
  * split_logical_operators - Check for and then split && and || operators.
  * @commands_array: An array of commands.
  * @i: Index to be checked.
- * @operators_array: An array of the logical operators for each previous command.
+ * @operators_array: An array of the logical operators
+ * for each previous command.
  *
  * Return: Index of the last command.
  */
 
-int split_logical_operators(char *commands_array[], int i, char operators_array[])
+int split_logical_operators(char *commands_array[], int i,
+		char operators_array[])
 {
 	int j;
 

@@ -48,7 +48,7 @@ char *fetch_info(char *name, ProgramData *data)
  * @value: New value
  * Return: a pointer to the value of the variable or NULL if it doesn't exist
  */
-int set_env(char *name, char* value, ProgramData *data)
+int set_env(char *name, char *value, ProgramData *data)
 {
 	int i, len, key_exists = 0;
 
