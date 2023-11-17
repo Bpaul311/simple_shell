@@ -6,11 +6,11 @@
  */
 void print_common_error(ProgramData *data, char *n_as_string)
 {
-	_printe(data->program_name);
-	_printe(": ");
-	_printe(n_as_string);
-	_printe(": ");
-	_printe(data->command_name);
+	_print_err(data->program_name);
+	_print_err(": ");
+	_print_err(n_as_string);
+	_print_err(": ");
+	_print_err(data->command_name);
 }
 
 /**
@@ -22,14 +22,14 @@ void print_specific_error(ProgramData *data, int errorcode)
 {
 	if (errorcode == 2)
 	{
-		_printe(": Illegal number: ");
+		_print_err(": Illegal number: ");
 	}
 	else if (errorcode == 3)
 	{
-		_printe(": can't cd to ");
+		_print_err(": can't cd to ");
 	}
-	_printe(data->tokens[1]);
-	_printe("\n");
+	_print_err(data->tokens[1]);
+	_print_err("\n");
 }
 
 /**
@@ -41,8 +41,7 @@ void print_error_message(int errorcode, ProgramData *data)
 	{
 	char n_as_string[10] = {'\0'};
 
-	n_as_string = itoa(data->exec_counter);
-
+	converter((long) data->exec_counter, n_as_string, 10);
 	print_common_error(data, n_as_string);
 	if (errorcode == 2 || errorcode == 3)
 	{
@@ -50,10 +49,10 @@ void print_error_message(int errorcode, ProgramData *data)
 	}
 	else if (errorcode == 127)
 	{
-		_printe(": not found\n");
+		_print_err(": not found\n");
 	}
 	else if (errorcode == 126)
 	{
-		_printe(": Permission denied\n");
+		_print_err(": Permission denied\n");
 	}
 }

@@ -1,6 +1,4 @@
-#include <stdlib.h>
-#include <string.h>
-
+#include "main.h"
 /**
    * split - Tokenize the string
    * @data: A pointer to program's data

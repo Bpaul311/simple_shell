@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * exec- Executes a command in a child process.
+ * execute_command- Executes a command in a child process.
  * @data: A pointer to the program's data.
  * Return: 0 on success, otherwise -1.
  */
-int exec(ProgramData *data)
+int execute_command(ProgramData *data)
 {
 	int val = 0, status;
 	pid_t pid;

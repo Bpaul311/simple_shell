@@ -27,7 +27,7 @@ void free_pointers_array(char **pointers_array)
  *
  * Return: Nothing.
  */
-void free_tokens_and_input(data_of_program *data)
+void free_tokens_and_input(ProgramData *data)
 {
 	if (data->tokens)
 		free_pointers_array(data->tokens);

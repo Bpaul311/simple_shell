@@ -8,43 +8,40 @@
 char *str_tok(char *line, char *delim)
 {
 	int j;
+	static char *str;
+	char *token;
 
-	if (line == NULL || *line == '\0')
-		return (NULL);
-	while (*line != '\0')
+	if (line != NULL)
+		str = line;
+	while (*str != '\0')
 	{
-
 		for (j = 0; delim[j] != '\0'; j++)
 		{
-			if (*line == delim[j])
+			if (*str == delim[j])
 				break;
 		}
-
-
 		if (delim[j] == '\0')
 			break;
-
-		line++;
+		str++;
 	}
-
-	char *token = line;
-
+	token = str;
 	if (*token == '\0')
 		return (NULL);
 
-	while (*line != '\0')
+	while (*str != '\0')
 	{
 		for (j = 0; delim[j] != '\0'; j++)
 		{
-			if (*line == delim[j])
+			if (*str == delim[j])
 			{
-				*line = '\0';
-				line++;
+				*str = '\0';
+				str++;
 
 				return (token);
 			}
 		}
 
-		line++;
+		str++;
 	}
+	return (token);
 }

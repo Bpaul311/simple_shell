@@ -26,7 +26,7 @@ char *fetch_info(char *name, ProgramData *data)
 	int i, len;
 
 	/* validate the arguments */
-	if (key == NULL || data->env == NULL)
+	if (name == NULL || data->env == NULL)
 		return (NULL);
 	len = _strlen(name);
 	for (i = 0; data->env[i]; i++)
@@ -53,7 +53,7 @@ int set_env(char *name, char *value, ProgramData *data)
 	int i, len, key_exists = 0;
 
 	/* validate the arguments */
-	if (key == NULL || data->env == NULL ||  value == NULL)
+	if (name == NULL || data->env == NULL ||  value == NULL)
 		return (1);
 	len = _strlen(name);
 	for (i = 0; data->env[i]; i++)
@@ -67,7 +67,7 @@ int set_env(char *name, char *value, ProgramData *data)
 			break;
 		}
 	}
-	data->env[i] = _strcat(_str_duplicate(key), "=");
+	data->env[i] = _strcat(_str_duplicate(name), "=");
 	data->env[i] = _strcat(data->env[i], value);
 	if (!key_exists)
 	{
@@ -88,11 +88,11 @@ int env_remove_key(char *key, ProgramData *data)
 	/* validate the arguments */
 	if (key == NULL || data->env == NULL)
 		return (0);
-	len = _strlen(name);
+	len = _strlen(key);
 	for (i = 0; data->env[i]; i++)
 	{
 		/* Iterates through the environ and check for coincidence of the vame */
-		if (_strcmp(name, data->env[i]) &&
+		if (_strcmp(key, data->env[i]) &&
 		data->env[i][len] == '=')
 		{
 			free(data->env[i]);

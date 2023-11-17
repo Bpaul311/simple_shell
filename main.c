@@ -13,73 +13,72 @@ int main(int argc, char *argv[], char *env[])
 	ProgramData data_struct = {NULL}, *data = &data_struct;
 	char *message = "";
 
-	initialise_data(data, argc, argv, env);
+	initialise_data(data, argv, env, argc);
 	signal(SIGINT, handle_EOF);
-	if (is - interactive(ac))
+	if (is_interactive(argc))
 	{
 		errno = 2;
 		message = MESSAGE;
 	}
 		errno = 0;
-		display_message(message, &info);
+		display_message(message, data);
 		return (0);
 }
 /**
  * initialise_data - Initializes program data into the structure
  * @data: A pointer to data structure
- * @av: Array of strings containing the command-line arguments.
+ * @argv: Array of strings containing the command-line arguments.
  * @env: Array of strings containing the environment variables.
- * @ac: The number of values received from the cmdline
+ * @argc: The number of values received from the cmdline
  * Return: Nothing
  */
-void initialise_data(ProgramData *data, char **av, char **env, int ac)
+void initialise_data(ProgramData *data, char **argv, char **env, int argc)
 {
 	unsigned int counter;
 
-	data->program_name = av[0];
+	data->program_name = argv[0];
 	data->input_line = NULL;
-	data->comman_named = NULL;
+	data->command_name = NULL;
 	data->exec_counter = 0;
-	data->token = NULL;
-	data->token = NULL;
+	data->tokens = NULL;
 	data->alias_list = NULL;
-	if (ac == 1)
+	if (argc == 1)
 		data->file_descriptor = STDIN_FILENO;
 	else
 	{
-		data->file_descriptor = open(av[1], O_RDONLY);
+		data->file_descriptor = open(argv[1], O_RDONLY);
 		if (data->file_descriptor == -1)
 		{
-			_printerr(data->program_name);
-			_printerr(" Can't open file");
-			_printerr(av[1]);
-			_printerr("\n");
+			_print_err(data->program_name);
+			_print_err(" Can't open file");
+			_print_err(argv[1]);
+			_print_err("\n");
 			exit(127);
 		}
 	}
-	for (i = 0; environ[i]; i++)
+	for (counter = 0; env[counter]; counter++)
 		;
-	data->env = malloc(sizeof(char *) * (i + 1));
-	for (i = 0; environ[i]; i++)
+	data->env = malloc(sizeof(char *) * (counter + 1));
+	for (counter = 0; env[counter]; counter++)
 
-		data->env[i] = _strdup(environ[i]);
-	data->env[i] = NULL;
+		data->env[counter] = _str_duplicate(env[counter]);
+	data->env[counter] = NULL;
 	env = data->env;
 	data->alias_list = malloc(sizeof(char *) * 50);
-	for (i = 0; i < 50; i++)
+	for (counter = 0; counter < 50; counter++)
 	{
-		data->alias_list[i] = NULL;
+		data->alias_list[counter] = NULL;
 	}
 }
 /**
  * is_interactive - returns true if shell is interactive mode
- * @ac: argument count of the shell
+ * @argc: argument count of the shell
  *
  * Return: 1 if interactive mode, 0 otherwise
  */
-int is_interactive(int ac)
+int is_interactive(int argc)
 {
-	return (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && ac == 1);
+	return (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && argc == 1);
 }
 /**
  * handle_EOF - Display msg_terminal on a newline when
@@ -88,7 +87,7 @@ int is_interactive(int ac)
  */
 void handle_EOF(int sig UNUSED)
 {
-	_prinf("\n");
+	_printf("\n");
 	_printf(MESSAGE);
 }
 /**
@@ -96,7 +95,7 @@ void handle_EOF(int sig UNUSED)
  * @msg_terminal: Printed message.
  * @data: Prompt loop displays.
  */
-void display_message(char *msg_terminal, data_of_program *data)
+void display_message(char *msg_terminal, ProgramData *data)
 {
 	int run = 1;
 	int err_code = 0, string_length = 0;
@@ -118,10 +117,10 @@ void display_message(char *msg_terminal, data_of_program *data)
 
 		if (data->tokens[0])
 		{
-		err_code = exec(data);
+		err_code = execute_command(data);
 
 		if (err_code != 0)
-		_print_errors(err_code, data);
+			print_error_message(err_code, data);
 		}
 
 	free_tokens_and_input(data);

@@ -12,7 +12,7 @@
 #include <limits.h>
 #include <stddef.h>
 /*define some important  macros */
-#define BUFSIZE 1024
+#define BUFFERSIZE 1024
 #define MESSAGE "$ "
 #define UNUSED __attribute__((unused))
 /**
@@ -59,6 +59,7 @@ int num_of_digits(int num);
 char *itoa(int num);
 int _atoi(char *str);
 int count_occurrences(char *str, char *ch);
+void converter(long num, char *string, int base);
 /*======== alliasses.c ========*/
 int append_string(char *buffer, char *str_to_add);
 int print_alias_info(ProgramData *data, char *alias);
@@ -100,9 +101,10 @@ int builtin_set_env(ProgramData *data);
 int unset_env(ProgramData *data);
 int custom_exit(ProgramData *data);
 int find_builtin(ProgramData *data);
+int alias_handler(ProgramData *data);
+int cd(ProgramData *data);
 /*======== execute.c  ========*/
-/* exec- Execute a command with its entire path */
-int exec(ProgramData *data);
+int execute_command(ProgramData *data);
 /*======== freeing.c  ========*/
 void free_everything(ProgramData  *data);
 void free_tokens_and_input(ProgramData  *data);

@@ -43,14 +43,14 @@ int print_alias_info(ProgramData *data, char *alias)
 		alias_len = _strlen(alias);
 		for (i = 0; data->alias_list[i]; i++)
 		{
-			if (alias == NULL || (_strcmp(data->alias_list[i], alias, alias_len)
+			if (alias == NULL || (_strcmp(data->alias_list[i], alias)
 				&& data->alias_list[i][alias_len] == '='))
 		{
 			for (j = 0; data->alias_list[i][j]; j++)
 			{
-				buffer[j] = data->alias_list[i][j]
+				buffer[j] = data->alias_list[i][j];
 				if (data->alias_list[i][j] == '=')
-				break;
+					break;
 			}
 		buffer[j + 1] = '\0';
 		append_string(buffer, "'");
@@ -83,7 +83,7 @@ char *retrieve_alias_value(ProgramData *data, char *alias)
 	for (i = 0; data->alias_list[i]; i++)
 	{
 		/* Iterates through the alias list and checks for the specified alias */
-		if (_strcmp(alias, data->alias_list[i], alias_len) &&
+		if (_strcmp(alias, data->alias_list[i]) &&
 			data->alias_list[i][alias_len] == '=')
 		{
 			return (data->alias_list[i] + alias_len + 1);
@@ -122,7 +122,7 @@ int add_alias(char *alias_name, ProgramData *data)
 
 	/* Iterates through the alias list and checks for the varname coincidence */
 	for (j = 0; data->alias_list[j]; j++)
-	if (_strcmp(alias_buffer, data->alias_list[j], i) &&
+	if (_strcmp(alias_buffer, data->alias_list[j]) &&
 	data->alias_list[j][i] == '=')
 	{
 		/* if the alias already exists */
@@ -134,8 +134,8 @@ int add_alias(char *alias_name, ProgramData *data)
 	if (alias_value)
 	{
 		/* if the alias value already exists */
-		buffer_append(alias_buffer, "=");
-		buffer_append(alias_buffer, alias_value);
+		append_string(alias_buffer, "=");
+		append_string(alias_buffer, alias_value);
 		data->alias_list[j] = _str_duplicate(alias_buffer);
 	}
 	else /* if the alias value does not exist */

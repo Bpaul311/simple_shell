@@ -71,13 +71,14 @@ void rev_string(char *s)
  */
 char *_strcat(char *destination, const char *source)
 {
+	size_t i, j;
+
+	i = 0;
+	j = 0;
 	if (destination == NULL)
 		destination = "";
 	if (source == NULL)
 		source = "";
-
-	size_t i = 0, j = 0;
-
 	while (destination[i] != '\0')
 
 		i++;

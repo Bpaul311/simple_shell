@@ -23,7 +23,7 @@ int find_builtin(ProgramData *data)
 
 for (counter = 0; arr[counter].func_name != NULL; counter++)
 	{
-	if (_strcmp(arr[counter].func_name, data->command))
+	if (_strcmp(arr[counter].func_name, data->command_name))
 
 		return (arr[counter].function(data));
 	}

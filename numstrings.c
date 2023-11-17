@@ -15,7 +15,7 @@ int num_of_digits(int num)
 		num1 = num * (-1);
 	}
 	else
-		num1 = n;
+		num1 = num;
 
 	while (num1 > 9)
 	{
@@ -97,11 +97,10 @@ int _atoi(char *str)
 
 int count_occurrences(char *str, char *ch)
 {
+	int i, counter;
+
 	if (str == NULL || ch == NULL)
 		return (0);
-
-	int i = 0, counter = 0;
-
 	while (str[i])
 	{
 		if (str[i] == ch[0])
@@ -113,3 +112,44 @@ int count_occurrences(char *str, char *ch)
 
 	return (counter);
 }
+/**
+ * converter - This converts number to string.
+ * @num: A number to be converted.
+ * @string: A buffer to store the number as string.
+ * @base: A base to convert the number
+ *
+ * Return: Nothing.
+ */
+void converter(long num, char *string, int base)
+{
+	int i = 0, is_negative = 0;
+	long rem = num;
+	char letters[] = {"0123456789abcdef"};
+
+	if (base < 2 || base > 36)
+	{
+		_printf("invalid base");
+		_printf("\n");
+		return;
+	}
+	if (num == 0)
+		string[i++] = '0';
+	if (string[0] == '-')
+		is_negative = 1;
+
+	while (rem)
+	{
+		if (rem < 0)
+			string[i++] = letters[-(rem % base)];
+		else
+			string[i++] = letters[rem % base];
+		rem /= base;
+	}
+	if (is_negative)
+		string[i] = '-';
+
+	string[i] = '\0';
+	rev_string(string);
+}
+
+

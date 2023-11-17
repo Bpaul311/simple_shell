@@ -12,7 +12,7 @@ int set_directory(ProgramData *data, char *new_dir)
 
 	getcwd(old_dir, 128);
 
-	if (!_strcmp(old_dir, new_dir, 0))
+	if (!_strcmp(old_dir, new_dir))
 	{
 		err_found = chdir(new_dir);
 		if (err_found == -1)
@@ -32,13 +32,13 @@ int set_directory(ProgramData *data, char *new_dir)
  */
 int cd(ProgramData *data)
 {
-	char *dir_home = env_get_key("HOME", data), *dir_old = NULL;
+	char *dir_home = fetch_info("HOME", data), *dir_old = NULL;
 	char old_dir[128] = {0};
 	int err_code = 0;
 
 	if (data->tokens[1])
 	{
-		if (_strcmp(data->tokens[1], "-", 0))
+		if (_strcmp(data->tokens[1], "-"))
 		{
 			dir_old = fetch_info("OLDPWD", data);
 			if (dir_old)
@@ -73,16 +73,14 @@ int alias_handler(ProgramData *data)
 
     /* if there are no arguments, print all aliases */
 	if (data->tokens[1] == NULL)
-	return (print_alias(data, NULL));
+		return (print_alias_info(data, NULL));
 
 	for (i = 1; data->tokens[i] != NULL; i++)
 	{
-	/* if there are arguments, set or print each alias */
-	if (count_characters(data->tokens[i], "="))
-		set_alias(data->tokens[i], data);
-	else
-		print_alias(data, data->tokens[i]);
+		if (count_occurrences(data->tokens[i], "="))
+			add_alias(data->tokens[i], data);
+		else
+			print_alias_info(data, data->tokens[i]);
 	}
-
 	return (0);
 }

@@ -18,8 +18,8 @@ int split_and_duplicate(char *commands_array[],
 	char *temp = commands_array[i];
 
 	commands_array[i][j] = '\0';
-	commands_array[i] = _strdup(commands_array[i]);
-	commands_array[i + 1] = _strdup(temp + j + 2);
+	commands_array[i] = _str_duplicate(commands_array[i]);
+	commands_array[i + 1] = _str_duplicate(temp + j + 2);
 	i++;
 	operators_array[i] = operator;
 	free(temp);
@@ -67,15 +67,15 @@ int split_logical_operators(char *commands_array[], int i,
 */
 int read_line(ProgramData *data)
 {
-	char buff[BUFFER_SIZE] = {'\0'};
+	char buff[BUFFERSIZE] = {'\0'};
 	static char *commands_array[50] = {NULL};
 	static char operators_array[50] = {'\0'};
 	ssize_t bytes_read, i = 0;
 
 	/* check if no more commands exist in the array */
 	/* and checks for logical operators */
-	if (!commands_array[0] || (operators_array[0] == '&' && err_num != 0) ||
-		(operators_array[0] == '|' && err_num == 0))
+	if (!commands_array[0] || (operators_array[0] == '&' && errno != 0) ||
+		(operators_array[0] == '|' && errno == 0))
 	{
 		/*free the memory allocated in the array if, indeed, it exists */
 		for (i = 0; commands_array[i]; i++)
@@ -85,7 +85,7 @@ int read_line(ProgramData *data)
 		}
 
 		/* read from the file descriptor into to the buffer */
-		bytes_read = read(data->file_descriptor, &buff, BUFFER_SIZE - 1);
+		bytes_read = read(data->file_descriptor, &buff, BUFFERSIZE - 1);
 		if (bytes_read == 0)
 			return (-1);
 
