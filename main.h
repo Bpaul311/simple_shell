@@ -114,6 +114,4 @@ void free_pointers_array(char **pointers_array);
 int find_program(ProgramData *data);
 char **find_path(ProgramData *data);
 int find_file(char *full_path);
-/*======== expand.c  ========*/
-void expand_variables(ProgramData *data);
 #endif
