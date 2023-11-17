@@ -107,12 +107,12 @@ int cd(ProgramData *data);
 /*======== execute.c  ========*/
 int execute_command(ProgramData *data);
 /*======== freeing.c  ========*/
-void free_everything(ProgramData  *data);
-void free_tokens_and_input(ProgramData  *data);
+void free_everything(ProgramData *data);
+void free_tokens_and_input(ProgramData *data);
 void free_pointers_array(char **pointers_array);
 /*======== path.c  ========*/
-int find_program(ProgramData  *data);
-char **find_path(ProgramData  *data);
+int find_program(ProgramData *data);
+char **find_path(ProgramData *data);
 int find_file(char *full_path);
 /*======== expand.c  ========*/
 void expand_variables(ProgramData *data);
