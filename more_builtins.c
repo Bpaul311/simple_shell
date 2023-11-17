@@ -12,7 +12,7 @@ int set_directory(ProgramData *data, char *new_dir)
 
 	getcwd(old_dir, 128);
 
-	if (!_strcmp(old_dir, new_dir))
+	if (!_strcompare(old_dir, new_dir, 0))
 	{
 		err_found = chdir(new_dir);
 		if (err_found == -1)
@@ -38,7 +38,7 @@ int cd(ProgramData *data)
 
 	if (data->tokens[1])
 	{
-		if (_strcmp(data->tokens[1], "-"))
+		if (_strcompare(data->tokens[1], "-", 0))
 		{
 			dir_old = fetch_info("OLDPWD", data);
 			if (dir_old)

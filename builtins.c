@@ -18,15 +18,11 @@ int find_builtin(ProgramData *data)
 	{"setenv", builtin_set_env},
 	{"unsetenv", unset_env},
 	{NULL, NULL}
-
-};
-
-for (counter = 0; arr[counter].func_name != NULL; counter++)
+	};
+	for (counter = 0; arr[counter].func_name != NULL; counter++)
 	{
-	if (_strcmp(arr[counter].func_name, data->command_name))
-
-		return (arr[counter].function(data));
+		if (_strcompare(arr[counter].func_name, data->command_name, 0))
+			return (arr[counter].function(data));
 	}
-
 	return (-1);
 }

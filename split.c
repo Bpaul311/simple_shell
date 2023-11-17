@@ -7,7 +7,7 @@
 void split(ProgramData *data)
 {
 	char *delim = " \t";
-	int i, j, num_of_tokens = 2, len;
+	int i, j, counter = 2, len;
 
 	len = _strlen(data->input_line);
 	if (len)
@@ -21,7 +21,21 @@ void split(ProgramData *data)
 		for (j = 0; delim[j]; j++)
 		{
 			if (data->input_line[i] == delim[j])
-			num_of_tokens++;
+				counter++;
 		}
+	}
+
+	data->tokens = malloc(counter * sizeof(char *));
+	if (data->tokens == NULL)
+	{
+		perror(data->program_name);
+		exit(errno);
+	}
+	i = 0;
+	data->tokens[i] = _str_duplicate(str_tok(data->input_line, delim));
+	data->command_name = _str_duplicate(data->tokens[0]);
+	while (data->tokens[i++])
+	{
+		data->tokens[i] = _str_duplicate(str_tok(NULL, delim));
 	}
 }

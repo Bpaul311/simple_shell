@@ -121,4 +121,3 @@ void display_message(char *msg_terminal, ProgramData *data)
 		}
 	}
 }
-
