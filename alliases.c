@@ -43,7 +43,7 @@ int print_alias_info(ProgramData *data, char *alias)
 		alias_len = _strlen(alias);
 		for (i = 0; data->alias_list[i]; i++)
 		{
-			if (alias == NULL || (_strcmp(data->alias_list[i], alias)
+			if (!alias || (_strcompare(data->alias_list[i], alias, alias_len)
 				&& data->alias_list[i][alias_len] == '='))
 		{
 			for (j = 0; data->alias_list[i][j]; j++)
@@ -83,7 +83,7 @@ char *retrieve_alias_value(ProgramData *data, char *alias)
 	for (i = 0; data->alias_list[i]; i++)
 	{
 		/* Iterates through the alias list and checks for the specified alias */
-		if (_strcmp(alias, data->alias_list[i]) &&
+		if (_strcompare(alias, data->alias_list[i], alias_len) &&
 			data->alias_list[i][alias_len] == '=')
 		{
 			return (data->alias_list[i] + alias_len + 1);
@@ -122,7 +122,7 @@ int add_alias(char *alias_name, ProgramData *data)
 
 	/* Iterates through the alias list and checks for the varname coincidence */
 	for (j = 0; data->alias_list[j]; j++)
-	if (_strcmp(alias_buffer, data->alias_list[j]) &&
+	if (_strcompare(alias_buffer, data->alias_list[j], i) &&
 	data->alias_list[j][i] == '=')
 	{
 		/* if the alias already exists */

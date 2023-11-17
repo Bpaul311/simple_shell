@@ -97,34 +97,28 @@ void handle_EOF(int sig UNUSED)
  */
 void display_message(char *msg_terminal, ProgramData *data)
 {
-	int run = 1;
 	int err_code = 0, string_length = 0;
 
-	while (run)
+	while (++(data->exec_counter))
 	{
-	_printf(msg_terminal);
-	err_code = string_length = read_line(data);
-
-	if (err_code == EOF)
-	{
-		free_everything(data);
-		exit(errno); /* if EOF is the first char of string, exit */
-	}
-
-	if (string_length >= 1)
-	{
-		split(data);
-
-		if (data->tokens[0])
+		_printf(msg_terminal);
+		err_code = string_length = read_line(data);
+		if (err_code == EOF)
 		{
-		err_code = execute_command(data);
-
-		if (err_code != 0)
-			print_error_message(err_code, data);
+			free_everything(data);
+			exit(errno);
 		}
-
-	free_tokens_and_input(data);
-	}
+		if (string_length >= 1)
+		{
+			split(data);
+			if (data->tokens[0])
+			{
+				err_code = execute_command(data);
+				if (err_code != 0)
+					print_error_message(err_code, data);
+			}
+			free_tokens_and_input(data);
+		}
 	}
 }
 

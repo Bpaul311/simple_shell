@@ -72,24 +72,17 @@ int read_line(ProgramData *data)
 	static char operators_array[50] = {'\0'};
 	ssize_t bytes_read, i = 0;
 
-	/* check if no more commands exist in the array */
-	/* and checks for logical operators */
 	if (!commands_array[0] || (operators_array[0] == '&' && errno != 0) ||
 		(operators_array[0] == '|' && errno == 0))
 	{
-		/*free the memory allocated in the array if, indeed, it exists */
 		for (i = 0; commands_array[i]; i++)
 		{
 			free(commands_array[i]);
 			commands_array[i] = NULL;
 		}
-
-		/* read from the file descriptor into to the buffer */
 		bytes_read = read(data->file_descriptor, &buff, BUFFERSIZE - 1);
 		if (bytes_read == 0)
 			return (-1);
-
-		/* this split lines for \n or ; */
 		i = 0;
 		do {
 			commands_array[i] = _str_duplicate(str_tok(i ? NULL : buff, "\n;"));

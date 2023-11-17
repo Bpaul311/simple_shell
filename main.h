@@ -54,6 +54,7 @@ int _strcmp(char *str1, char *str2);
 void rev_string(char *s);
 char *_strcat(char *destination, const char *source);
 char *_str_duplicate(char *str);
+int _strcompare(char *string1, char *string2, int number);
 /*======== num_strings.c ========*/
 int num_of_digits(int num);
 char *itoa(int num);

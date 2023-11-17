@@ -10,20 +10,19 @@ int custom_exit(ProgramData *data)
 
 	if (data->tokens[1])
 	{
-	i = 0;
-	while (data->tokens[1][i])
+		i = 0;
+		while (data->tokens[1][i])
 		{
-		if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9')
-			&& data->tokens[1][i] != '+')
-		{
-			errno = 2;
-			return (2);
-		}
-		i++;
+			if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9')
+					&& data->tokens[1][i] != '+')
+			{
+				errno = 2;
+				return (2);
+			}
+			i++;
 		}
 		errno = _atoi(data->tokens[1]);
 	}
-
 	free_everything(data);
 	exit(errno);
 }
@@ -78,7 +77,7 @@ int Display_env(ProgramData *data)
 	char cpname[50] = {'\0'};
 	char *var_cpy = NULL;
 
-	if (!(data->tokens[1]))
+	if (data->tokens[1] == NULL)
 		print_env(data);
 	else
 	{

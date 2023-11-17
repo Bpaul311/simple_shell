@@ -31,7 +31,7 @@ char *fetch_info(char *name, ProgramData *data)
 	len = _strlen(name);
 	for (i = 0; data->env[i]; i++)
 	{/* Iterates through the environ and check for coincidence of the vame */
-		if (_strcmp(name, data->env[i]) &&
+		if (_strcompare(name, data->env[i], len) &&
 		 data->env[i][len] == '=')
 		{
 			return (data->env[i] + len + 1);
@@ -59,7 +59,7 @@ int set_env(char *name, char *value, ProgramData *data)
 	for (i = 0; data->env[i]; i++)
 	{
 		/* Iterates through the environ and check for coincidence of the vame */
-		if (_strcmp(name, data->env[i]) &&
+		if (_strcompare(name, data->env[i], len) &&
 		data->env[i][len] == '=')
 		{
 			key_exists = 1;
@@ -92,7 +92,7 @@ int env_remove_key(char *key, ProgramData *data)
 	for (i = 0; data->env[i]; i++)
 	{
 		/* Iterates through the environ and check for coincidence of the vame */
-		if (_strcmp(key, data->env[i]) &&
+		if (_strcompare(key, data->env[i], len) &&
 		data->env[i][len] == '=')
 		{
 			free(data->env[i]);

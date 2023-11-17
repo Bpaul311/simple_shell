@@ -71,29 +71,40 @@ void rev_string(char *s)
  */
 char *_strcat(char *destination, const char *source)
 {
-	size_t i, j;
+	int len1, len2;
+	char *str;
 
-	i = 0;
-	j = 0;
+	len1 = 0;
+	len2 = 0;
 	if (destination == NULL)
 		destination = "";
+	len1 = _strlen(destination);
 	if (source == NULL)
 		source = "";
-	while (destination[i] != '\0')
-
-		i++;
-
-
-	while (source[j] != '\0')
+	len2 = _strlen(source);
+	str = malloc(sizeof(char) * (len1 + len2 + 1));
+	if (str == NULL)
 	{
-		destination[i] = source[j];
-		i++;
-		j++;
+		errno = ENOMEM;
+		perror("Error");
+		return (NULL);
 	}
-
-	destination[i] = '\0';
-
-	return (destination);
+	len1 = 0;
+	while (destination[len1] != '\0')
+	{
+		str[len1] = destination[len1];
+		len1++;
+		len2++;
+	}
+	free(destination);
+	len2 = 0;
+	while (source[len2] != '\0')
+	{
+		str[len1] = source[len2];
+		len1++;
+	}
+	str[len1] = '\0';
+	return (str);
 }
 
 /**

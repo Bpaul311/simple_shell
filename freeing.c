@@ -51,7 +51,7 @@ void free_everything(ProgramData *data)
 	if (data->file_descriptor != 0)
 	{
 		if (close(data->file_descriptor))
-			_print_err(data->program_name);
+			perror(data->program_name);
 	}
 	free_tokens_and_input(data);
 	free_pointers_array(data->env);
