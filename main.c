@@ -110,6 +110,7 @@ void display_message(char *msg_terminal, ProgramData *data)
 		}
 		if (string_length >= 1)
 		{
+			expand_variables(data);
 			split(data);
 			if (data->tokens[0])
 			{
